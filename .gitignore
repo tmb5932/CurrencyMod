@@ -22,7 +22,7 @@ eclipse
 run
 
 # Travis Added
-/src/generated/
+*/src/generated
 run-data
 
 # Files from Forge MDK
