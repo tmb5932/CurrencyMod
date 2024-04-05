@@ -1,5 +1,5 @@
-# Blank Mod Repo
+# Hard Cash Mod
 
-This is a repo to be copied whenever a new mod is being made.
+This is a minecraft mod about physical cash :)
 
-Made by Kwzii
+Made by Travis Brown
