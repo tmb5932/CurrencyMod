@@ -22,8 +22,8 @@ eclipse
 run
 
 # Travis Added
-*/src/generated
-run-data
+/src/generated/
+/run-data/
 
 # Files from Forge MDK
 forge*changelog.txt
