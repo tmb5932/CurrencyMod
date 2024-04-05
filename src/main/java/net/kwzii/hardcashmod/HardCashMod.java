@@ -1,7 +1,9 @@
 package net.kwzii.hardcashmod;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
+import net.kwzii.hardcashmod.block.ModBlocks;
+import net.kwzii.hardcashmod.item.ModCreativeModTabs;
+import net.kwzii.hardcashmod.item.ModItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -25,6 +27,12 @@ public class HardCashMod {
     public HardCashMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModCreativeModTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
+
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -46,7 +54,7 @@ public class HardCashMod {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("First Mod Started");
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
@@ -55,9 +63,6 @@ public class HardCashMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
 }
