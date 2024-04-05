@@ -1,4 +1,4 @@
-package net.kwzii.blankmod;
+package net.kwzii.hardcashmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -15,14 +15,14 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(BlankMod.MOD_ID)
-public class BlankMod {
+@Mod(HardCashMod.MOD_ID)
+public class HardCashMod {
     // Define mod id in a common place for everything to reference
-    public static final String MOD_ID = "blankmod";
+    public static final String MOD_ID = "hardcashmod";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public BlankMod() {
+    public HardCashMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Register the commonSetup method for modloading

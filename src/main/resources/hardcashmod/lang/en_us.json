@@ -1,0 +1,17 @@
+{
+  "item.hardcashmod.sapphire": "Sapphire",
+  "item.hardcashmod.raw_sapphire": "Raw Sapphire",
+  "item.hardcashmod.maxwell": "Maxwell",
+  "item.hardcashmod.metal_detector": "Metal Detector",
+  "item.hardcashmod.dice": "Dice",
+  "item.hardcashmod.double_dice": "Pair of Dice",
+  "item.hardcashmod.dollar_bill": "One Dollar Bill",
+
+  "tooltip.hardcashmod.metal_detector.tooltip": "Finds valuables underground!",
+
+  "block.hardcashmod.sapphire_block": "Block of Sapphire",
+  "block.hardcashmod.raw_sapphire_block": "Block of Raw Sapphire",
+  "block.hardcashmod.sapphire_ore": "Sapphire Ore",
+
+  "creativetab.hardcashmod_tab": "Kwzii's Hard Cash Mod"
+}
