@@ -61,6 +61,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(ModItems.DICE.get(), 2)
                 .unlockedBy(getHasName(ModItems.DICE.get()), has(ModItems.DICE.get()))
                 .save(consumer);
+
+        // INK RECIPE
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MAGNETIC_INK.get()) // todo change this to a custom block crafter
+                .pattern("III")
+                .pattern("RCR")
+                .pattern("III")
+                .define('I', Items.IRON_NUGGET)
+                .define('R', Items.RED_DYE)
+                .define('C', Items.CHARCOAL)
+                .unlockedBy(getHasName(Items.NETHERITE_INGOT), has(Items.NETHERITE_INGOT))
+                .save(consumer);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {

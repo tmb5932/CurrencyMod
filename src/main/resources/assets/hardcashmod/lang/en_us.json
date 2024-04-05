@@ -6,6 +6,7 @@
   "item.hardcashmod.dice": "Dice",
   "item.hardcashmod.double_dice": "Pair of Dice",
   "item.hardcashmod.dollar_bill": "One Dollar Bill",
+  "item.hardcashmod.magnetic_ink": "Magnetic Ink",
 
   "tooltip.hardcashmod.metal_detector.tooltip": "Finds valuables underground!",
 
@@ -16,5 +17,5 @@
   "block.hardcashmod.dudey34_block": "Block of Dudey34's",
   "block.hardcashmod.glowstone34_block": "Glowing Block of Dudey34's",
 
-  "creativetab.hardcashmod_tab": "Kwzii's First Mod"
+  "creativetab.hardcashmod_tab": "Kwzii's Hard Cash Mod"
 }

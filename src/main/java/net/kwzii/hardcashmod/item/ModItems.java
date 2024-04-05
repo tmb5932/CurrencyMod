@@ -5,6 +5,7 @@ import net.kwzii.hardcashmod.item.custom.DiceItem;
 import net.kwzii.hardcashmod.item.custom.DoubleDiceItem;
 import net.kwzii.hardcashmod.item.custom.FuelItem;
 import net.kwzii.hardcashmod.item.custom.MetalDetectorItem;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -35,6 +36,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> DOUBLE_DICE = ITEMS.register("double_dice",
             () -> new DoubleDiceItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> MAGNETIC_INK = ITEMS.register("magnetic_ink",
+            () -> new Item(new Item.Properties().durability(100)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -32,7 +32,6 @@ public class HardCashMod {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
-
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -54,7 +53,7 @@ public class HardCashMod {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
-        LOGGER.info("First Mod Started");
+        LOGGER.info("Hard Cash Mod Started");
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
