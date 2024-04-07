@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -81,5 +83,44 @@ public class BasicMoneyPrinterBlock extends BaseEntityBlock {
 
         return createTickerHelper(pBlockEntityType, ModBlockEntities.BASIC_MONEY_PRINTER_BE.get(),
                 (level, blockPos, blockState, basicMoneyPrinterBlockEntity) -> basicMoneyPrinterBlockEntity.tick(level, blockPos, blockState));
+    }
+
+    @Override
+    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
+        if (!pLevel.isClientSide()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            System.out.println("NEIGHBORS CHANGED");
+            if (blockEntity instanceof BasicMoneyPrinterBlockEntity) {
+                BasicMoneyPrinterBlockEntity printerEntity = (BasicMoneyPrinterBlockEntity) blockEntity;
+                System.out.println("FOUND PRINTER");
+
+                BlockEntity hopperBlockEntity = pLevel.getBlockEntity(pNeighborPos);
+                if (hopperBlockEntity instanceof HopperBlockEntity) {
+                    HopperBlockEntity hopper = (HopperBlockEntity) hopperBlockEntity;
+                    System.out.println("FOUND HOPPER");
+                    for (int i = 0; i < hopper.getContainerSize(); i++) {
+                        boolean reset = false;
+                        ItemStack extractedStack = hopper.getItem(0);
+                        System.out.println("FOR LOOP: " + hopper.isEmpty());
+                        System.out.println(extractedStack);
+                        while (!extractedStack.isEmpty()) {
+                            System.out.println("WHILE LOOPING");
+                            printerEntity.insertItem(extractedStack, pPos, pNeighborPos);
+                            hopper.removeItem(i, 1);
+                            for (int k = 0; k < i; k++) {
+                                if (!hopper.getItem(k).isEmpty()) {
+                                    i = k;
+                                    reset = true;
+                                    break;
+                                }
+                            }
+                            if (reset) {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

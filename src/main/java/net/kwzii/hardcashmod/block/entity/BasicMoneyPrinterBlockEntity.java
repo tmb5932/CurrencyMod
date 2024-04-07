@@ -171,23 +171,39 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
         return progress >= maxProgress;
     }
 
-
-
     private void increaseCraftingProgress() {
-        // Only progresses craft every other tick, while ink is damaged every tick (aka halves ink lifespan
+        // Only progresses craft every other tick, while ink is damaged every tick (aka halves ink lifespan)
         if (cookSlower == 1) {
             progress++;
             cookSlower = 0;
         } else {
             cookSlower++;
         }
-            ItemStack ink = this.itemHandler.getStackInSlot(INK_SLOT);
-            ink.setDamageValue(ink.getDamageValue() + 1);
+        ItemStack ink = this.itemHandler.getStackInSlot(INK_SLOT);
+        ink.setDamageValue(ink.getDamageValue() + 1);
 
-            if (ink.getDamageValue() >= ink.getMaxDamage()) {
-                ink.shrink(1);
-                ItemStack emptyJar = new ItemStack(ModItems.EMPTY_JAR.get(), 1);
-                this.itemHandler.setStackInSlot(INK_SLOT, new ItemStack(emptyJar.getItem(), emptyJar.getCount()));
-            }
+        if (ink.getDamageValue() >= ink.getMaxDamage()) {
+            ink.shrink(1);
+            ItemStack emptyJar = new ItemStack(ModItems.EMPTY_JAR.get(), 1);
+            this.itemHandler.setStackInSlot(INK_SLOT, new ItemStack(emptyJar.getItem(), emptyJar.getCount()));
+        }
+    }
+
+    public void insertItem(ItemStack stack, BlockPos printer, BlockPos hopper) {
+        int slot;
+        System.out.println("INSERTING SINSERTNY INSERITNFG S");
+        if (printer.getY() == hopper.getY()) {
+            slot = 2;
+        } else {
+            slot = 1;
+        }
+        System.out.println("STACK SLOT IS " + slot);
+        ItemStack currentStack = itemHandler.getStackInSlot(slot);
+//        if (currentStack.isEmpty()) {
+            itemHandler.insertItem(slot, stack, false);
+//        } else if (ItemStack.isSameItemSameTags(currentStack, stack)) {
+//            currentStack.grow(stack.getCount());
+//        }
+        setChanged();
     }
 }
