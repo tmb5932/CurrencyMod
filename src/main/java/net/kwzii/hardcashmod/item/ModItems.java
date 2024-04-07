@@ -5,7 +5,6 @@ import net.kwzii.hardcashmod.item.custom.DiceItem;
 import net.kwzii.hardcashmod.item.custom.DoubleDiceItem;
 import net.kwzii.hardcashmod.item.custom.FuelItem;
 import net.kwzii.hardcashmod.item.custom.MetalDetectorItem;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

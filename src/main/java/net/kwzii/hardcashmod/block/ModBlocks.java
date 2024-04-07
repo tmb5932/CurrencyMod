@@ -30,12 +30,6 @@ public class ModBlocks {
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(3.5f)
                     .requiresCorrectToolForDrops(), UniformInt.of(3, 6)));
 
-//    public static final RegistryObject<Block> DUDEY34_BLOCK = registerBlock("dudey34_block",
-//            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BRICKS).sound(SoundType.ANVIL)));
-//
-//    public static final RegistryObject<Block> GLOWSTONE34_BLOCK = registerBlock("glowstone34_block",
-//            () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLOWSTONE).lightLevel((p_152607_) -> 15)));
-
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
