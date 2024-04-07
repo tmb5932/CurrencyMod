@@ -17,7 +17,9 @@ public class ModTags {
         }
     }
     public static class Items {
-        public static final TagKey<Item> BILLS = tag("cash_bills"); //todo finish this implementation
+        public static final TagKey<Item> BILLS = tag("cash_bills");
+        public static final TagKey<Item> JARS = tag("ink_jars");
+        public static final TagKey<Item> PRINTING_PARCHMENT = tag("printing_parchment");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(HardCashMod.MOD_ID, name));

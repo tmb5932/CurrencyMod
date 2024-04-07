@@ -2,8 +2,12 @@ package net.kwzii.hardcashmod;
 
 import com.mojang.logging.LogUtils;
 import net.kwzii.hardcashmod.block.ModBlocks;
+import net.kwzii.hardcashmod.block.entity.ModBlockEntities;
 import net.kwzii.hardcashmod.item.ModCreativeModTabs;
 import net.kwzii.hardcashmod.item.ModItems;
+import net.kwzii.hardcashmod.screen.BasicMoneyPrinterScreen;
+import net.kwzii.hardcashmod.screen.ModMenuTypes;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -31,6 +35,10 @@ public class HardCashMod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModBlockEntities.register(modEventBus);
+
+        ModMenuTypes.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -62,6 +70,7 @@ public class HardCashMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            MenuScreens.register(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), BasicMoneyPrinterScreen::new);
         }
     }
 }

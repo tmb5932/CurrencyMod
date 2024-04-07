@@ -1,11 +1,15 @@
 package net.kwzii.hardcashmod.datagen;
 
 import net.kwzii.hardcashmod.HardCashMod;
+import net.kwzii.hardcashmod.item.ModItems;
+import net.kwzii.hardcashmod.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,6 +21,16 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        this.tag(ModTags.Items.JARS).add(
+                ModItems.EMPTY_JAR.get(),
+                ModItems.MAGNETIC_INK.get());
 
+        this.tag(ModTags.Items.BILLS).add(
+                ModItems.DOLLAR_BILL.get());
+
+        this.tag(ModTags.Items.PRINTING_PARCHMENT).add(
+                Items.MAP,
+                Items.PAPER
+        );
     }
 }

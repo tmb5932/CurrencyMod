@@ -37,7 +37,11 @@ public class ModItems {
             () -> new DoubleDiceItem(new Item.Properties()));
 
     public static final RegistryObject<Item> MAGNETIC_INK = ITEMS.register("magnetic_ink",
-            () -> new Item(new Item.Properties().durability(100)));
+            () -> new Item(new Item.Properties().durability(750)));
+
+    public static final RegistryObject<Item> EMPTY_JAR = ITEMS.register("empty_jar",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

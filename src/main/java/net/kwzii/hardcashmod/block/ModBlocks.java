@@ -1,6 +1,7 @@
 package net.kwzii.hardcashmod.block;
 
 import net.kwzii.hardcashmod.HardCashMod;
+import net.kwzii.hardcashmod.block.custom.BasicMoneyPrinterBlock;
 import net.kwzii.hardcashmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -29,6 +30,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> SAPPHIRE_ORE = registerBlock("sapphire_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(3.5f)
                     .requiresCorrectToolForDrops(), UniformInt.of(3, 6)));
+
+    public static final RegistryObject<Block> BASIC_MONEY_PRINTER = registerBlock("basic_money_printer",
+            () -> new BasicMoneyPrinterBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
