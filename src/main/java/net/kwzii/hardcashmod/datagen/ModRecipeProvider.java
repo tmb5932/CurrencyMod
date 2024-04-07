@@ -5,6 +5,7 @@ import net.kwzii.hardcashmod.HardCashMod;
 import net.kwzii.hardcashmod.block.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -62,14 +63,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(ModItems.DICE.get()), has(ModItems.DICE.get()))
                 .save(consumer);
 
-        // INK RECIPE
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MAGNETIC_INK.get()) // todo change this to a custom block crafter
-                .pattern("III")
-                .pattern("RCR")
-                .pattern("III")
-                .define('I', Items.IRON_NUGGET)
-                .define('R', Items.RED_DYE)
-                .define('C', Items.CHARCOAL)
+        // EMPTY JAR RECIPE
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.EMPTY_JAR.get())
+                .pattern("GWG")
+                .pattern("G G")
+                .pattern("GGG")
+                .define('G', Items.GLASS)
+                .define('W', ItemTags.PLANKS)
                 .unlockedBy(getHasName(Items.NETHERITE_INGOT), has(Items.NETHERITE_INGOT))
                 .save(consumer);
     }
