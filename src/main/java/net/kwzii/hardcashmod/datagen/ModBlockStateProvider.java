@@ -22,6 +22,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlockWithItem(ModBlocks.BASIC_MONEY_PRINTER.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/basic_money_printer")));
+
+        simpleBlockWithItem(ModBlocks.INK_JUICER.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/ink_juicer")));
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

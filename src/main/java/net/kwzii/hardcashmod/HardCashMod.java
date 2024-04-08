@@ -6,6 +6,8 @@ import net.kwzii.hardcashmod.block.entity.ModBlockEntities;
 import net.kwzii.hardcashmod.item.ModCreativeModTabs;
 import net.kwzii.hardcashmod.item.ModItems;
 import net.kwzii.hardcashmod.screen.BasicMoneyPrinterScreen;
+import net.kwzii.hardcashmod.screen.InkJuicerMenu;
+import net.kwzii.hardcashmod.screen.InkJuicerScreen;
 import net.kwzii.hardcashmod.screen.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -71,6 +73,7 @@ public class HardCashMod {
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             MenuScreens.register(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), BasicMoneyPrinterScreen::new);
+            MenuScreens.register(ModMenuTypes.INK_JUICER_MENU.get(), InkJuicerScreen::new);
         }
     }
 }

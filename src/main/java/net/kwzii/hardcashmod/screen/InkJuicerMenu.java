@@ -1,8 +1,7 @@
 package net.kwzii.hardcashmod.screen;
 
 import net.kwzii.hardcashmod.block.ModBlocks;
-import net.kwzii.hardcashmod.block.entity.BasicMoneyPrinterBlockEntity;
-import net.kwzii.hardcashmod.util.ModTags;
+import net.kwzii.hardcashmod.block.entity.InkJuicerBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,21 +11,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.NotNull;
 
-public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
-    public final BasicMoneyPrinterBlockEntity blockEntity;
+public class InkJuicerMenu extends AbstractContainerMenu {
+    public final InkJuicerBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public BasicMoneyPrinterMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+    public InkJuicerMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(7));
     }
 
-    public BasicMoneyPrinterMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 3);
-        blockEntity = ((BasicMoneyPrinterBlockEntity) entity);
+    public InkJuicerMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.INK_JUICER_MENU.get(), pContainerId);
+        checkContainerSize(inv,2);
+        blockEntity = ((InkJuicerBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
 
@@ -34,42 +32,45 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11) {
-                @Override
-                public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.is(ModTags.Items.PRINTING_PARCHMENT);
-                }
-            });
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 59) {
-                @Override
-                public boolean mayPlace(@NotNull ItemStack stack) {
-                    return false;
-                }
-            });
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 40, 35) {
-                @Override
-                public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.is(ModTags.Items.JARS);
-                }
-            });
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 48, 16));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 48, 52));
         });
 
         addDataSlots(data);
     }
 
-    public boolean isCrafting() {
+    public boolean isJuicing() {
         return data.get(0) > 0;
     }
 
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 26; // This is the height in pixels of your arrow
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    public boolean isPouring() {
+        return data.get(2) > 0;
     }
 
-    // The quickMoveStack function allows for shift clicking items
+    public int getScaledInputProgress() {
+        int progress = this.data.get(0);
+        int maxProgress = this.data.get(1);
+        int progressArrowSize = 22; // Length of arrow in pixels
+
+        return maxProgress != 0 && progress != 0 ? (progress * progressArrowSize) / maxProgress : 0;
+    }
+
+    public int getScaledOutputProgress() {
+        int progress = this.data.get(2);
+        int maxProgress = this.data.get(3);
+        int progressArrowSize = 22; // Length of arrow in pixels
+
+        return maxProgress != 0 && progress != 0 ? (progress * progressArrowSize) / maxProgress : 0;
+    }
+
+    public int getScaledLiquid() {
+        int currentLiquid = this.data.get(4);
+        int maxLiquid = this.data.get(5);
+        int liquidContainerSize = 52; // Height of liquid storage in pixels
+
+        return maxLiquid != 0 && currentLiquid != 0 ? (currentLiquid * liquidContainerSize) / maxLiquid : 0;
+    }
+
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
@@ -86,7 +87,7 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
@@ -123,7 +124,7 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.BASIC_MONEY_PRINTER.get());
+                pPlayer, ModBlocks.INK_JUICER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
@@ -137,6 +138,19 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+        }
+    }
+
+    public int getInkColor() {
+        switch(data.get(6)) {
+            case 0 -> { return 0xFFFFFFFF; }    // White
+            case 1 -> { return 0xFF000000; }    // Black
+            case 2 -> {return 0xFFFF0000; }     // Red
+            case 3 -> {return 0xFF0000FF; }     // Blue
+            case 4 -> { return 0xFF00FF00; }    // Green
+            case 5 -> {return 0xFFFF69B4; }     // Pink
+            case 6 -> { return 0xFF200000; }    // Metallic Red
+            default -> {return 0xFFFFFFFF; }    // White
         }
     }
 }

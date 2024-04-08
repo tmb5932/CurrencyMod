@@ -21,8 +21,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.DICE);
         simpleItem(ModItems.DOUBLE_DICE);
 
-        simpleItem(ModItems.MAGNETIC_INK);
         simpleItem(ModItems.EMPTY_JAR);
+        simpleItem(ModItems.MAGNETIC_INK);
+        simpleItem(ModItems.BLACK_INK);
+        simpleItem(ModItems.RED_INK);
+        simpleItem(ModItems.BLUE_INK);
+        simpleItem(ModItems.GREEN_INK);
+        simpleItem(ModItems.PINK_INK);
 
         simpleItem(ModItems.MAXWELL);
 

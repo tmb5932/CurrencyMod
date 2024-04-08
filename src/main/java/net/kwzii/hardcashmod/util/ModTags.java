@@ -21,6 +21,14 @@ public class ModTags {
         public static final TagKey<Item> JARS = tag("ink_jars");
         public static final TagKey<Item> PRINTING_PARCHMENT = tag("printing_parchment");
 
+        public static final TagKey<Item> INK_CREATING_ITEMS = tag("ink_crafting");
+        public static final TagKey<Item> BLACK_INK_CRAFTING = tag("black_ink_crafting");
+        public static final TagKey<Item> RED_INK_CRAFTING = tag("red_ink_crafting");
+        public static final TagKey<Item> BLUE_INK_CRAFTING = tag("blue_ink_crafting");
+        public static final TagKey<Item> GREEN_INK_CRAFTING = tag("green_ink_crafting");
+        public static final TagKey<Item> PINK_INK_CRAFTING = tag("pink_ink_crafting");
+
+
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(HardCashMod.MOD_ID, name));
         }

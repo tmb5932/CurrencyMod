@@ -16,6 +16,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("basic_money_printer_be", () ->
                     BlockEntityType.Builder.of(BasicMoneyPrinterBlockEntity::new, ModBlocks.BASIC_MONEY_PRINTER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<InkJuicerBlockEntity>> INK_JUICE_BE =
+            BLOCK_ENTITIES.register("ink_juicer_be", () ->
+                    BlockEntityType.Builder.of(InkJuicerBlockEntity::new, ModBlocks.INK_JUICER.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

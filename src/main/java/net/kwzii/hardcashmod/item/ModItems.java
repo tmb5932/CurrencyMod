@@ -36,11 +36,27 @@ public class ModItems {
     public static final RegistryObject<Item> DOUBLE_DICE = ITEMS.register("double_dice",
             () -> new DoubleDiceItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> EMPTY_JAR = ITEMS.register("empty_jar",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> MAGNETIC_INK = ITEMS.register("magnetic_ink",
             () -> new Item(new Item.Properties().durability(750)));
 
-    public static final RegistryObject<Item> EMPTY_JAR = ITEMS.register("empty_jar",
-            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> BLACK_INK = ITEMS.register("black_ink",
+            () -> new Item(new Item.Properties().durability(750)));
+
+    public static final RegistryObject<Item> RED_INK = ITEMS.register("red_ink",
+            () -> new Item(new Item.Properties().durability(750)));
+
+    public static final RegistryObject<Item> BLUE_INK = ITEMS.register("blue_ink",
+            () -> new Item(new Item.Properties().durability(750)));
+
+    public static final RegistryObject<Item> GREEN_INK = ITEMS.register("green_ink",
+            () -> new Item(new Item.Properties().durability(750)));
+
+    public static final RegistryObject<Item> PINK_INK = ITEMS.register("pink_ink",
+            () -> new Item(new Item.Properties().durability(750)));
+
 
 
     public static void register(IEventBus eventBus) {

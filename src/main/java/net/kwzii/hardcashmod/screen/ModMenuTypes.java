@@ -17,6 +17,9 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<BasicMoneyPrinterMenu>> BASIC_MONEY_PRINTER_MENU =
             registerMenuType("basic_money_printer_menu", BasicMoneyPrinterMenu::new);
 
+    public static final RegistryObject<MenuType<InkJuicerMenu>> INK_JUICER_MENU =
+            registerMenuType("ink_juicer_menu", InkJuicerMenu::new);
+
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

@@ -1,6 +1,6 @@
 package net.kwzii.hardcashmod.block.custom;
 
-import net.kwzii.hardcashmod.block.entity.BasicMoneyPrinterBlockEntity;
+import net.kwzii.hardcashmod.block.entity.InkJuicerBlockEntity;
 import net.kwzii.hardcashmod.block.entity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,9 +22,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class BasicMoneyPrinterBlock extends BaseEntityBlock {
-    public static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
-    public BasicMoneyPrinterBlock(Properties pProperties) {
+public class InkJuicerBlock extends BaseEntityBlock {
+    public static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 19, 13);
+
+    public InkJuicerBlock(Properties pProperties) {
         super(pProperties);
     }
 
@@ -42,8 +43,8 @@ public class BasicMoneyPrinterBlock extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof BasicMoneyPrinterBlockEntity) {
-                ((BasicMoneyPrinterBlockEntity) blockEntity).drops();
+            if (blockEntity instanceof InkJuicerBlockEntity) {
+                ((InkJuicerBlockEntity) blockEntity).drops();
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
@@ -53,8 +54,8 @@ public class BasicMoneyPrinterBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof BasicMoneyPrinterBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (BasicMoneyPrinterBlockEntity)entity, pPos); // ONLY WORKS IN 1.20.1, NOT NEWER!!
+            if(entity instanceof InkJuicerBlockEntity) {
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (InkJuicerBlockEntity)entity, pPos); // ONLY WORKS IN 1.20.1, NOT NEWER!!
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
@@ -62,11 +63,10 @@ public class BasicMoneyPrinterBlock extends BaseEntityBlock {
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new BasicMoneyPrinterBlockEntity(blockPos, blockState);
+        return new InkJuicerBlockEntity(blockPos, blockState);
     }
 
     @Nullable
@@ -76,7 +76,8 @@ public class BasicMoneyPrinterBlock extends BaseEntityBlock {
             return null;
         }
 
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.BASIC_MONEY_PRINTER_BE.get(),
+        return createTickerHelper(pBlockEntityType, ModBlockEntities.INK_JUICE_BE.get(),
                 (level, blockPos, blockState, pBlockEntity) -> pBlockEntity.tick(level, blockPos, blockState));
     }
+
 }

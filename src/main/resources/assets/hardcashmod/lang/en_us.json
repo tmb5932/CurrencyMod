@@ -7,6 +7,11 @@
   "item.hardcashmod.double_dice": "Pair of Dice",
   "item.hardcashmod.dollar_bill": "One Dollar Bill",
   "item.hardcashmod.magnetic_ink": "Jar of Magnetic Ink",
+  "item.hardcashmod.black_ink": "Jar of Black Ink",
+  "item.hardcashmod.red_ink": "Jar of Red Ink",
+  "item.hardcashmod.blue_ink": "Jar of Blue Ink",
+  "item.hardcashmod.green_ink": "Jar of Green Ink",
+  "item.hardcashmod.pink_ink": "Jar of Pink Ink",
   "item.hardcashmod.empty_jar": "An Empty Jar",
 
   "tooltip.hardcashmod.metal_detector.tooltip": "Finds valuables underground!",
@@ -16,6 +21,7 @@
   "block.hardcashmod.sapphire_ore": "Sapphire Ore",
 
   "block.hardcashmod.basic_money_printer": "Basic Printer",
+  "block.hardcashmod.ink_juicer": "Ink Juicer",
 
   "creativetab.hardcashmod_tab": "Kwzii's Hard Cash Mod"
 }

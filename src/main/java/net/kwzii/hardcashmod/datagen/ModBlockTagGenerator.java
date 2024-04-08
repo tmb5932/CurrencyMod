@@ -9,7 +9,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -30,14 +29,18 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 //                .addTag(Tags.Blocks.ORES); // command for all base minecraft ores
 
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
-                ModBlocks.BASIC_MONEY_PRINTER.get());
+                ModBlocks.BASIC_MONEY_PRINTER.get(),
+                ModBlocks.INK_JUICER.get()
+        );
 
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 ModBlocks.RAW_SAPPHIRE_BLOCK.get(),
-                ModBlocks.SAPPHIRE_ORE.get());
+                ModBlocks.SAPPHIRE_ORE.get()
+        );
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-                ModBlocks.SAPPHIRE_BLOCK.get());
+                ModBlocks.SAPPHIRE_BLOCK.get()
+        );
 
 //        this.tag(Tags.Blocks.NEEDS_NETHERITE_TOOL)
 //                .add();
@@ -45,7 +48,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 ModBlocks.RAW_SAPPHIRE_BLOCK.get(),
                 ModBlocks.SAPPHIRE_BLOCK.get(),
-                ModBlocks.SAPPHIRE_ORE.get());
+                ModBlocks.SAPPHIRE_ORE.get(),
+                ModBlocks.BASIC_MONEY_PRINTER.get(),
+                ModBlocks.INK_JUICER.get()
+        );
 
 //        this.tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.);
 

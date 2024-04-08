@@ -2,6 +2,7 @@ package net.kwzii.hardcashmod.block;
 
 import net.kwzii.hardcashmod.HardCashMod;
 import net.kwzii.hardcashmod.block.custom.BasicMoneyPrinterBlock;
+import net.kwzii.hardcashmod.block.custom.InkJuicerBlock;
 import net.kwzii.hardcashmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -33,6 +34,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BASIC_MONEY_PRINTER = registerBlock("basic_money_printer",
             () -> new BasicMoneyPrinterBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+
+    public static final RegistryObject<Block> INK_JUICER = registerBlock("ink_juicer",
+            () -> new InkJuicerBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
