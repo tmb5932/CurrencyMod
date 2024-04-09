@@ -13,6 +13,12 @@
   "item.hardcashmod.green_ink": "Jar of Green Ink",
   "item.hardcashmod.pink_ink": "Jar of Pink Ink",
   "item.hardcashmod.empty_jar": "An Empty Jar",
+  "item.hardcashmod.black_paper": "Black Paper",
+  "item.hardcashmod.red_paper": "Red Paper",
+  "item.hardcashmod.blue_paper": "Blue Paper",
+  "item.hardcashmod.green_paper": "Green Paper",
+  "item.hardcashmod.pink_paper": "Pink Paper",
+  "item.hardcashmod.dark_red_paper": "Dark Red Paper",
 
   "tooltip.hardcashmod.metal_detector.tooltip": "Finds valuables underground!",
 

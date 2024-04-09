@@ -31,6 +31,10 @@ public class ModCreativeModTabs {
                 }
             }).build());
 
+    /**
+     * Registers an IEventBus with the mod creative tab
+     * @param eventBus the IEventBus to be registered
+     */
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);
     }

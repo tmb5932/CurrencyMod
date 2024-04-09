@@ -11,6 +11,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+/**
+ * Class of all custom items added
+ */
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, HardCashMod.MOD_ID);
@@ -57,8 +60,28 @@ public class ModItems {
     public static final RegistryObject<Item> PINK_INK = ITEMS.register("pink_ink",
             () -> new Item(new Item.Properties().durability(750)));
 
+    public static final RegistryObject<Item> BLACK_PAPER = ITEMS.register("black_paper",
+            () -> new Item(new Item.Properties().stacksTo(64)));
 
+    public static final RegistryObject<Item> RED_PAPER = ITEMS.register("red_paper",
+            () -> new Item(new Item.Properties().stacksTo(64)));
 
+    public static final RegistryObject<Item> BLUE_PAPER = ITEMS.register("blue_paper",
+        () -> new Item(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> GREEN_PAPER = ITEMS.register("green_paper",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> PINK_PAPER = ITEMS.register("pink_paper",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> DARK_RED_PAPER = ITEMS.register("dark_red_paper",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
+    /**
+     * Registers an IEventBus with the mod items
+     * @param eventBus the IEventBus to be registered
+     */
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

@@ -29,6 +29,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.GREEN_INK);
         simpleItem(ModItems.PINK_INK);
 
+        simpleItem(ModItems.BLACK_PAPER);
+        simpleItem(ModItems.RED_PAPER);
+        simpleItem(ModItems.BLUE_PAPER);
+        simpleItem(ModItems.GREEN_PAPER);
+        simpleItem(ModItems.PINK_PAPER);
+        simpleItem(ModItems.DARK_RED_PAPER);
+
         simpleItem(ModItems.MAXWELL);
 
         simpleItem(ModItems.RAW_SAPPHIRE);
