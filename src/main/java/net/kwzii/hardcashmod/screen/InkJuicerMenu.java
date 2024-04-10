@@ -12,15 +12,31 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
+/**
+ * Ink Juicer Menu Class
+ * @author Travis Brown
+ */
 public class InkJuicerMenu extends AbstractContainerMenu {
     public final InkJuicerBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
+    /**
+     * Constructor for the Ink Juicer Menu
+     * Calls to other constructor
+     */
     public InkJuicerMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(7));
     }
 
+    /**
+     * Constructor for Ink Juicer Menu
+     * Creates the menu, adds the player inventory and hotbar, and adds the item slots
+     * @param pContainerId the container ID
+     * @param inv the player inventory
+     * @param entity the block entity
+     * @param data the container data
+     */
     public InkJuicerMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.INK_JUICER_MENU.get(), pContainerId);
         checkContainerSize(inv,2);
@@ -39,14 +55,26 @@ public class InkJuicerMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
+    /**
+     * Method to see if the block entity has input progress
+     * @return true if the block entities input progress is greater than 0
+     */
     public boolean isJuicing() {
         return data.get(0) > 0;
     }
 
+    /**
+     * Method to see if the block entity has output progress
+     * @return true if the block entities output progress is greater than 0
+     */
     public boolean isPouring() {
         return data.get(2) > 0;
     }
 
+    /**
+     * Method to get the current input progress in % so the rendered progress arrow is accurate
+     * @return % input progress completed
+     */
     public int getScaledInputProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
@@ -55,6 +83,10 @@ public class InkJuicerMenu extends AbstractContainerMenu {
         return maxProgress != 0 && progress != 0 ? (progress * progressArrowSize) / maxProgress : 0;
     }
 
+    /**
+     * Method to get the current output progress in % so the rendered progress arrow is accurate
+     * @return % output progress completed
+     */
     public int getScaledOutputProgress() {
         int progress = this.data.get(2);
         int maxProgress = this.data.get(3);
@@ -63,6 +95,10 @@ public class InkJuicerMenu extends AbstractContainerMenu {
         return maxProgress != 0 && progress != 0 ? (progress * progressArrowSize) / maxProgress : 0;
     }
 
+    /**
+     * Method to get the current liquid stored in % so the rendered liquid storage tank is accurate
+     * @return % current liquid stored completed
+     */
     public int getScaledLiquid() {
         int currentLiquid = this.data.get(4);
         int maxLiquid = this.data.get(5);
@@ -121,12 +157,21 @@ public class InkJuicerMenu extends AbstractContainerMenu {
         return copyOfSourceStack;
     }
 
+    /**
+     * Checks for validity
+     * @param pPlayer the player
+     * @return true if stillValid call is true, false otherwise
+     */
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
                 pPlayer, ModBlocks.INK_JUICER.get());
     }
 
+    /**
+     * Method to add the players inventory to the Printer menu
+     * @param playerInventory the players inventory to be added
+     */
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
@@ -135,12 +180,22 @@ public class InkJuicerMenu extends AbstractContainerMenu {
         }
     }
 
+    /**
+     * Method to add the players inventory to the Printer menu
+     * @param playerInventory the players inventory to be added
+     */
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 
+    /**
+     * Method to get the color the stored liquid should be
+     * Used by screen to render the liquid tank the right color
+     * Gets the stored current liquid type and returns that color
+     * @return color hexcode for the liquid to be rendered as
+     */
     public int getInkColor() {
         switch(data.get(6)) {
             case 0 -> { return 0xFFFFFFFF; }    // White

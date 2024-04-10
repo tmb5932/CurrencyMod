@@ -80,6 +80,10 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
 
     /**
      * Adds the lazyItemHandler to the getCapability() call
+     * @param cap the capability
+     * @param side the direction side
+     * @return the LazyItemHandler
+     * @param <T> capability type
      */
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -108,7 +112,7 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
     }
 
     /**
-     * Determines what the block will drop if it is destroyed
+     * Method to make the inventory contents drop when block broken
      */
     public void drops() {
         SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
@@ -128,6 +132,13 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
         return Component.translatable("block.hardcashmod.basic_money_printer");
     }
 
+    /**
+     * Creates GUI menu for the printer block
+     * @param pContainerId the int container ID
+     * @param inv the player inventory
+     * @param player the player
+     * @return new Basic Money Printer Menu instance
+     */
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory inv, Player player) {

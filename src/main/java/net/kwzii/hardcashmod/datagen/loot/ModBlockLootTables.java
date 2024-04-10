@@ -16,11 +16,18 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
 
+/**
+ * Class for data generation of the Mod Block Loot Tables
+ * @author Travis Brown
+ */
 public class ModBlockLootTables extends BlockLootSubProvider {
     public ModBlockLootTables() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
+    /**
+     * Method to generate loot tables for blocks to determine what drops when broken
+     */
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.SAPPHIRE_BLOCK.get());
@@ -32,6 +39,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 block -> createCopperLikeOreDrops(ModBlocks.SAPPHIRE_ORE.get(), ModItems.RAW_SAPPHIRE.get()));
     }
 
+    /**
+     * Method to create a copper like ore drop
+     * @param pBlock the block being broken
+     * @param item the item being dropped
+     * @return the Loot table builder
+     */
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,
                 this.applyExplosionDecay(pBlock, LootItem.lootTableItem(item)
@@ -39,6 +52,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
     }
 
+    /**
+     * Method to iterate through all mod blocks
+     * @return iterable block type
+     */
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;

@@ -8,6 +8,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+/**
+ * Class for all the mod block entities to be registered
+ * @author Travis Brown
+ */
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, HardCashMod.MOD_ID);
@@ -20,6 +24,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("ink_juicer_be", () ->
                     BlockEntityType.Builder.of(InkJuicerBlockEntity::new, ModBlocks.INK_JUICER.get()).build(null));
 
+    /**
+     * Method to register an IEventBus with the block entities
+     * @param eventBus IEventBus to be registered with the block entity deferred register
+     */
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

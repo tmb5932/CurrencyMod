@@ -13,6 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Class of all custom items added
+ * @author Travis Brown
  */
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =

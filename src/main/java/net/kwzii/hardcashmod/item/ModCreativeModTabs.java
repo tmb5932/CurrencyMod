@@ -14,6 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Class to create custom creative tab
+ * @author Travis Brown
  */
 public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =

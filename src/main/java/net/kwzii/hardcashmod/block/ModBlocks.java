@@ -19,6 +19,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
+/**
+ * Class for all the mod blocks to be registered in
+ * @author Travis Brown
+ */
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HardCashMod.MOD_ID);
 
@@ -44,10 +48,21 @@ public class ModBlocks {
         return toReturn;
     }
 
+    /**
+     * Function to register block a block
+     * @param name the name of the block
+     * @param block the block that is being registered
+     * @return Registry object of the registered block
+     * @param <T> Register object type
+     */
     private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
+    /**
+     * Registers an IEventBus with the mod blocks
+     * @param eventBus the IEventBus to be registered
+     */
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }

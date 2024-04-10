@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Class to make a custom fuel type item
+ * @author Travis Brown
  */
 public class FuelItem extends Item {
     private int burnTime;

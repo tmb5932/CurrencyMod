@@ -11,11 +11,23 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
+/**
+ * Mod Item datagen class
+ * @author Travis Brown
+ */
 public class ModItemModelProvider extends ItemModelProvider {
+    /**
+     * Constructor for mod item data gen
+     * @param output PackOutput
+     * @param existingFileHelper the existing file helper
+     */
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, HardCashMod.MOD_ID, existingFileHelper);
     }
 
+    /**
+     * Method to register the custom mod item models
+     */
     @Override
     protected void registerModels() {
         simpleItem(ModItems.DICE);
@@ -47,6 +59,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     }
 
+    /**
+     * Method to create a simple item
+     * @param item the custom mod item to be created
+     * @return the ItemModelBuilder
+     */
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",

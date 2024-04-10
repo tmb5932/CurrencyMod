@@ -27,6 +27,10 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Ink Juicer Custom Block Entity
+ * @author Travis Brown
+ */
 public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(2);
 
@@ -58,14 +62,27 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
 
         private final int intVal;
 
+        /**
+         * Creator for liquid type enum
+         * @param intVal the int value associated with that liquid type
+         */
         LiquidType(int intVal) {
             this.intVal = intVal;
         }
 
+        /**
+         * Getter method for liquid type
+         * @return int intVal
+         */
         public int getIntVal() {
             return intVal;
         }
 
+        /**
+         * Returns the liquidType that has the associated int value
+         * @param intValue the int value of the liquid we want to get
+         * @return LiquidType associated with the given number
+         */
         public static LiquidType setByInt(int intValue) {
             for (LiquidType enumValue : LiquidType.values()) {
                 if (enumValue.intVal == intValue) {
@@ -76,6 +93,11 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
+    /**
+     * Constructor for Ink Juicer Block Entity
+     * @param pPos the block position
+     * @param pBlockState the block state
+     */
     public InkJuicerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.INK_JUICE_BE.get(), pPos, pBlockState);
         this.data = new ContainerData() {
@@ -113,6 +135,13 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         };
     }
 
+    /**
+     * Adds the lazyItemHandler to the getCapability() call
+     * @param cap the capability
+     * @param side the direction side
+     * @return the LazyItemHandler
+     * @param <T> capability type
+     */
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER) {
@@ -121,18 +150,27 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         return super.getCapability(cap, side);
     }
 
+    /**
+     * Adds the lazyItemHandler to the onLoad() call
+     */
     @Override
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
     }
 
+    /**
+     * Adds the lazyItemHandler to the invalidateCaps() method call
+     */
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
     }
 
+    /**
+     * Method to make the inventory contents drop when block broken
+     */
     public void drops() {
         SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -141,17 +179,32 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
+    /**
+     * Sets the display name of the block entity
+     * @return Component of what the name of the block entity is
+     */
     @Override
     public Component getDisplayName() {
         return Component.translatable("block.hardcashmod.ink_juicer");
     }
 
+    /**
+     * Creates GUI menu for the ink juicer block
+     * @param pContainerId the int container ID
+     * @param inv the player inventory
+     * @param player the player
+     * @return new Ink Juicer Menu instance
+     */
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new InkJuicerMenu(i, inventory, this, this.data);
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory inv, Player player) {
+        return new InkJuicerMenu(pContainerId, inv, this, this.data);
     }
 
+    /**
+     * Method to save additional information to server files
+     * @param pTag data structure used to store information
+     */
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
@@ -163,6 +216,10 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         super.saveAdditional(pTag);
     }
 
+    /**
+     * Loads saved information about block
+     * @param pTag data structure used to store information
+     */
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
@@ -173,6 +230,14 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         liquidTypeStored = LiquidType.setByInt(pTag.getInt("ink_juicer.liquid_type_stored"));
     }
 
+    /**
+     * Method that runs every tick
+     * Checks if crafting is possible, and if so, starts process of crafting
+     * Checks if output is possible, and if so, starts process of outputting
+     * @param pLevel the world instance the tick is happening on
+     * @param pPos the block's position
+     * @param pState the state of the block
+     */
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
         if (hasRecipe()) {
             inputProgress++;
@@ -208,6 +273,9 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
+    /**
+     * Fills the ink jar in the output slot with the correct ink depending on what liquid type is stored
+     */
     private void fillJar() {
         ItemStack inkJar = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
         if (inkJar.is(ModItems.EMPTY_JAR.get())) {
@@ -249,16 +317,28 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
+    /**
+     * Method to check if the output progress is finished. Used to increase readability of tick method
+     * @return true if output progress is greater or equal to outputMaxProgress, otherwise false
+     */
     private boolean outputProgressFinished() {
         return outputProgress >= outputMaxProgress;
     }
 
+    /**
+     * Method to check if output is possible
+     * Includes checking if a viable jar is in the output slot, if it needs ink, and if there is liquid stored to put in
+     * @return true if output is possible, otherwise false
+     */
     private boolean outputPossible() {
         ItemStack inkJar = this.itemHandler.getStackInSlot(OUTPUT_SLOT);
         boolean jarNeedsInk = inkJar.isDamaged();
         return (jarNeedsInk || inkJar.is(ModItems.EMPTY_JAR.get())) && itemMatchesInk(inkJar) && amtLiquidStored != 0;
     }
 
+    /**
+     * Adds liquid to liquid storage and uses one of the items in the input slot
+     */
     private void addLiquid() {
         ItemStack inputStack = this.itemHandler.getStackInSlot(INPUT_SLOT);
         this.itemHandler.extractItem(INPUT_SLOT, 1, false);
@@ -272,10 +352,18 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
+    /**
+     * Method to check if input progress is finished. Used to increase readability of tick method
+     * @return true if inputProgress is greater or equal to inputMaxProgress
+     */
     private boolean inputProgressFinished() {
         return inputProgress >= inputMaxProgress;
     }
 
+    /**
+     * Checks if inking more juice is possible
+     * @return true if more liquid can be added to the liquid storage
+     */
     private boolean hasRecipe() {
         ItemStack inputItemStack = this.itemHandler.getStackInSlot(INPUT_SLOT);
         boolean canMakeInk = inputItemStack.is(ModTags.Items.INK_CREATING_ITEMS);
@@ -283,6 +371,11 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         return canMakeInk && (amtLiquidStored < liquidMaxStored) && itemMatchesInk(inputItemStack);
     }
 
+    /**
+     * Checks if the passed in item matches the ink in the liquid storage tank
+     * @param itemStack the item to be compared
+     * @return true if the liquid stored matches the item type
+     */
     private boolean itemMatchesInk(ItemStack itemStack) {
         if (itemStack.is(ModItems.EMPTY_JAR.get())) {
             return true;
@@ -318,6 +411,11 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         return false;
     }
 
+    /**
+     * Gets liquid type that the given item produces
+     * @param itemStack the item to find liquid equivalent of
+     * @return the LiquidType that matches the passed in item
+     */
     private LiquidType getLiquidType(ItemStack itemStack) {
         if (itemStack.is(ModTags.Items.BLACK_INK_CRAFTING)) {
             return LiquidType.BLACK;

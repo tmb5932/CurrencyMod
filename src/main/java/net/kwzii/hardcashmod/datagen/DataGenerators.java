@@ -11,8 +11,16 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Class to call all data generation calls
+ * @author Travis Brown
+ */
 @Mod.EventBusSubscriber(modid = HardCashMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
+    /**
+     * Method to gather all the data and add them to the data generator
+     * @param event the GatherDataEvent that is having the data added to it
+     */
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();

@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * Class for custom Metal Detector item
+ * @author Travis Brown
  */
 public class MetalDetectorItem extends Item {
 

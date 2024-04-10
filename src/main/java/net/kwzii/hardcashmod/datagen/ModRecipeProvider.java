@@ -17,11 +17,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Mod Recipe Provider Class
+ * @author Travis Brown
+ */
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
+    /**
+     * Constructor for Mod Recipe Provider
+     * @param pOutput the PackOutput
+     */
     public ModRecipeProvider(PackOutput pOutput) {
         super(pOutput);
     }
 
+    /**
+     * Method to build custom recipes for custom mod blocks and items
+     * @param consumer the Finished Recipe Consumer
+     */
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         // SAPPHIRE SMELTING
@@ -74,14 +86,46 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(consumer);
     }
 
-    protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {
-        oreCooking(pFinishedRecipeConsumer, RecipeSerializer.SMELTING_RECIPE, pIngredients, pCategory, pResult, pExperience, pCookingTIme, pGroup, "_from_smelting");
+    /**
+     * Method to simplify making an ore smelting recipe
+     * @param pFinishedRecipeConsumer the finished recipe consumer
+     * @param pIngredients the ingredients
+     * @param pCategory the category
+     * @param pResult the result from the smelting
+     * @param pExperience the experience gained from the smelting
+     * @param pCookingTime the cook time of the smelting
+     * @param pGroup the group
+     */
+    protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup) {
+        oreCooking(pFinishedRecipeConsumer, RecipeSerializer.SMELTING_RECIPE, pIngredients, pCategory, pResult, pExperience, pCookingTime, pGroup, "_from_smelting");
     }
 
+    /**
+     * Method to simplify making an ore blasting recipe
+     * @param pFinishedRecipeConsumer the finished recipe consumer
+     * @param pIngredients the ingredients
+     * @param pCategory the category
+     * @param pResult the result from the smelting
+     * @param pExperience the experience gained from the smelting
+     * @param pCookingTime the cook time of the smelting
+     * @param pGroup the group
+     */
     protected static void oreBlasting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup) {
         oreCooking(pFinishedRecipeConsumer, RecipeSerializer.BLASTING_RECIPE, pIngredients, pCategory, pResult, pExperience, pCookingTime, pGroup, "_from_blasting");
     }
 
+    /**
+     * Method to simplify making an ore cooking recipe
+     * @param pFinishedRecipeConsumer the finished recipe consumer
+     * @param pCookingSerializer the cooking serializer
+     * @param pIngredients the ingredients
+     * @param pCategory the category
+     * @param pResult the result from the smelting
+     * @param pExperience the experience gained from the smelting
+     * @param pCookingTime the cook time of the smelting
+     * @param pGroup the group
+     * @param pRecipeName the recipe name
+     */
     protected static void oreCooking(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeSerializer<? extends AbstractCookingRecipe> pCookingSerializer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup, String pRecipeName) {
         Iterator var9 = pIngredients.iterator();
 

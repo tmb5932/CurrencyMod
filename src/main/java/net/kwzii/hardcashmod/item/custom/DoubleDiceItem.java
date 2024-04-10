@@ -15,6 +15,7 @@ import java.util.Random;
 
 /**
  * Custom Double Dice item
+ * @author Travis Brown
  */
 public class DoubleDiceItem extends Item {
     Random rand = new Random();

@@ -14,15 +14,31 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Basic Money Printer Menu Class
+ * @author Travis Brown
+ */
 public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     public final BasicMoneyPrinterBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
+    /**
+     * Constructor for the Basic Money Printer Menu
+     * Calls to other constructor
+     */
     public BasicMoneyPrinterMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
+    /**
+     * Constructor for Basic Money Printer Menu
+     * Creates menu, calls methods to add the player inv and hotbar, and registers item slots in the menu
+     * @param pContainerId the Container ID
+     * @param inv the player inventory
+     * @param entity the block entity
+     * @param data the container data
+     */
     public BasicMoneyPrinterMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), pContainerId);
         checkContainerSize(inv, 3);
@@ -57,10 +73,19 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
+    /**
+     * Method to check if the printer is progressing
+     * Used to see if progress bar needs to be rendered
+     * @return true if progress is greater than 0
+     */
     public boolean isCrafting() {
         return data.get(0) > 0;
     }
 
+    /**
+     * Method to get the current progress in % so the rendered progress arrow is accurate
+     * @return % progress completed
+     */
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
@@ -120,12 +145,21 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
         return copyOfSourceStack;
     }
 
+    /**
+     * Checks for validity
+     * @param pPlayer the player
+     * @return true if stillValid call is true, false otherwise
+     */
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
                 pPlayer, ModBlocks.BASIC_MONEY_PRINTER.get());
     }
 
+    /**
+     * Method to add the players inventory to the Printer menu
+     * @param playerInventory the players inventory to be added
+     */
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
@@ -134,6 +168,10 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
         }
     }
 
+    /**
+     * Method to add the players inventory to the Printer menu
+     * @param playerInventory the players inventory to be added
+     */
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));

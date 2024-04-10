@@ -9,14 +9,28 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+/**
+ * Ink Juicer Screen class
+ * @author Travis Brown
+ */
 public class InkJuicerScreen extends AbstractContainerScreen<InkJuicerMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(HardCashMod.MOD_ID, "textures/gui/ink_juicer_gui.png");
+
+    /**
+     * Constructor for the juicer screen
+     * @param pMenu the menu to be shown
+     * @param pPlayerInventory the player inventory
+     * @param pTitle the title of the screen
+     */
 
     public InkJuicerScreen(InkJuicerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
+    /**
+     * Method to initialize the screen
+     */
     @Override
     protected void init() {
         super.init();
@@ -24,6 +38,13 @@ public class InkJuicerScreen extends AbstractContainerScreen<InkJuicerMenu> {
         this.titleLabelY = 10000;
     }
 
+    /**
+     * Method to render the graphics
+     * @param guiGraphics the gui graphics
+     * @param pPartialTick float value partial tick
+     * @param pMouseX int the mouse x value
+     * @param pMouseY int the mouse y value
+     */
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -37,6 +58,12 @@ public class InkJuicerScreen extends AbstractContainerScreen<InkJuicerMenu> {
         renderProgressArrow(guiGraphics, x, y);
     }
 
+    /**
+     * Method to render progress arrow's and liquid storage
+     * @param guiGraphics the gui graphics
+     * @param x the starting x value
+     * @param y the starting y value
+     */
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         // INPUT PROGRESS ARROW RENDER
         if(menu.isJuicing()) {
@@ -53,6 +80,13 @@ public class InkJuicerScreen extends AbstractContainerScreen<InkJuicerMenu> {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);    // resets shaders to default
     }
 
+    /**
+     * Method to render the graphics
+     * @param guiGraphics the graphics to render
+     * @param mouseX the mouses x value
+     * @param mouseY the mouses y value
+     * @param delta the delta float
+     */
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);

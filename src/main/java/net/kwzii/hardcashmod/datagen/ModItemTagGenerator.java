@@ -14,11 +14,26 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Mod Item Tag Generator Class
+ * @author Travis Brown
+ */
 public class ModItemTagGenerator extends ItemTagsProvider {
+    /**
+     * Constructor for Mod Item Generator
+     * @param p_275343_ the packoutput
+     * @param p_275729_ the provider
+     * @param p_275322_ the tag lookup
+     * @param existingFileHelper the existing file helper
+     */
     public ModItemTagGenerator(PackOutput p_275343_, CompletableFuture<HolderLookup.Provider> p_275729_, CompletableFuture<TagLookup<Block>> p_275322_, @Nullable ExistingFileHelper existingFileHelper) {
         super(p_275343_, p_275729_, p_275322_, HardCashMod.MOD_ID, existingFileHelper);
     }
 
+    /**
+     * Method to add items to custom tags
+     * @param provider the provider
+     */
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(ModTags.Items.JARS).add(

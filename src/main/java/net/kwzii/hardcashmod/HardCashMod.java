@@ -6,7 +6,6 @@ import net.kwzii.hardcashmod.block.entity.ModBlockEntities;
 import net.kwzii.hardcashmod.item.ModCreativeModTabs;
 import net.kwzii.hardcashmod.item.ModItems;
 import net.kwzii.hardcashmod.screen.BasicMoneyPrinterScreen;
-import net.kwzii.hardcashmod.screen.InkJuicerMenu;
 import net.kwzii.hardcashmod.screen.InkJuicerScreen;
 import net.kwzii.hardcashmod.screen.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -22,7 +21,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
+/**
+ * Main Class for Hard Cash Mod
+ * @author Travis Brown
+ */
 @Mod(HardCashMod.MOD_ID)
 public class HardCashMod {
     // Define mod id in a common place for everything to reference
@@ -30,6 +32,9 @@ public class HardCashMod {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    /**
+     * Constructor for HardCashMod
+     */
     public HardCashMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -52,26 +57,43 @@ public class HardCashMod {
         modEventBus.addListener(this::addCreative);
     }
 
+    /**
+     * Common Setup
+     * @param event the FML Common Setup Event
+     */
     private void commonSetup(final FMLCommonSetupEvent event) {
     }
 
-    // Add the example block item to the building blocks tab
+    /**
+     * Method to add blocks to the creative menus
+     * @param event the Creative Mod Tab Content Event
+     */
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
+    /**
+     * Method called when server starts
+     * @param event Server Starting Event
+     */
+    @SubscribeEvent     // You can use SubscribeEvent and let the Event Bus discover methods to call
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("Hard Cash Mod Started");
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+    /**
+     * Method for Client Mod Events
+     */
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     public static class ClientModEvents {
+
+        /**
+         * The on Client Startup call
+         * @param event FML Client Setup Event
+         */
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
+        public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), BasicMoneyPrinterScreen::new);
             MenuScreens.register(ModMenuTypes.INK_JUICER_MENU.get(), InkJuicerScreen::new);
         }

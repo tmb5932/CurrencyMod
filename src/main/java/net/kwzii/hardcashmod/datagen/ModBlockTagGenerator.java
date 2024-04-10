@@ -13,11 +13,25 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Class to generate tags for custom mod blocks
+ * @author Travis Brown
+ */
 public class ModBlockTagGenerator extends BlockTagsProvider {
+    /**
+     * Constructor for mod block tag generation
+     * @param output the Pack Output
+     * @param lookupProvider the lookupProvider
+     * @param existingFileHelper the existing File Helper
+     */
     public ModBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, HardCashMod.MOD_ID, existingFileHelper);
     }
 
+    /**
+     * Method to add blocks to custom tags
+     * @param provider the provider
+     */
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(ModTags.Blocks.METAL_DETECTOR_VALUABLES).add(

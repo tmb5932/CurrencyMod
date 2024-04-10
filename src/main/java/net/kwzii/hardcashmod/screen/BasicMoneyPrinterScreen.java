@@ -9,14 +9,27 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+/**
+ * Basic Money Printer Screen Class
+ * @author Travis Brown
+ */
 public class BasicMoneyPrinterScreen extends AbstractContainerScreen<BasicMoneyPrinterMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(HardCashMod.MOD_ID, "textures/gui/basic_money_printer_gui.png");
 
+    /**
+     * Constructor for the printer screen
+     * @param pMenu the menu to be shown
+     * @param pPlayerInventory the player inventory
+     * @param pTitle the title of the screen
+     */
     public BasicMoneyPrinterScreen(BasicMoneyPrinterMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
+    /**
+     * Method to initialize the screen
+     */
     @Override
     protected void init() {
         super.init();
@@ -24,6 +37,13 @@ public class BasicMoneyPrinterScreen extends AbstractContainerScreen<BasicMoneyP
         this.titleLabelY = 10000;
     }
 
+    /**
+     * Method to render the graphics
+     * @param guiGraphics the gui graphics
+     * @param pPartialTick float value partial tick
+     * @param pMouseX int the mouse x value
+     * @param pMouseY int the mouse y value
+     */
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -37,12 +57,25 @@ public class BasicMoneyPrinterScreen extends AbstractContainerScreen<BasicMoneyP
         renderProgressArrow(guiGraphics, x, y);
     }
 
+    /**
+     * Method to render progress arrow
+     * @param guiGraphics the gui graphics
+     * @param x the starting x value
+     * @param y the starting y value
+     */
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
             guiGraphics.blit(TEXTURE, x + 85, y + 30, 176, 0, 8, menu.getScaledProgress());
         }
     }
 
+    /**
+     * Method to render the graphics
+     * @param guiGraphics the graphics to render
+     * @param mouseX the mouses x value
+     * @param mouseY the mouses y value
+     * @param delta the delta float
+     */
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);
