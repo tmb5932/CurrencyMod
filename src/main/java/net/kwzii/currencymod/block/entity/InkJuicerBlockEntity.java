@@ -54,11 +54,12 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
     private enum LiquidType {
         NONE(0),
         BLACK(1),
-        RED(2),
-        BLUE(3),
-        GREEN(4),
-        PINK(5),
-        MAGNETIC(6);
+        WHITE(2),
+        RED(3),
+        BLUE(4),
+        GREEN(5),
+        PINK(6),
+        MAGNETIC(7);
 
         private final int intVal;
 
@@ -284,6 +285,9 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
                 case BLACK ->
                     this.itemHandler.insertItem(OUTPUT_SLOT, new ItemStack(ModItems.BLACK_INK.get()), false);
 
+                case WHITE ->
+                        this.itemHandler.insertItem(OUTPUT_SLOT, new ItemStack(ModItems.WHITE_INK.get()), false);
+
                 case RED ->
                     this.itemHandler.insertItem(OUTPUT_SLOT, new ItemStack(ModItems.RED_INK.get()), false);
 
@@ -387,6 +391,10 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
                 if (itemStack.is(ModTags.Items.BLACK_INK_CRAFTING) || itemStack.is(ModItems.BLACK_INK.get())) {
                     return true;
                 }}
+            case WHITE -> {
+                if (itemStack.is(ModTags.Items.WHITE_INK_CRAFTING) || itemStack.is(ModItems.WHITE_INK.get())) {
+                    return true;
+                }}
             case RED -> {
                 if (itemStack.is(ModTags.Items.RED_INK_CRAFTING) || itemStack.is(ModItems.RED_INK.get())) {
                     return true;
@@ -419,6 +427,8 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
     private LiquidType getLiquidType(ItemStack itemStack) {
         if (itemStack.is(ModTags.Items.BLACK_INK_CRAFTING)) {
             return LiquidType.BLACK;
+        } else if (itemStack.is(ModTags.Items.WHITE_INK_CRAFTING)) {
+            return LiquidType.WHITE;
         } else if (itemStack.is(ModTags.Items.RED_INK_CRAFTING)) {
             return LiquidType.RED;
         } else if (itemStack.is(ModTags.Items.BLUE_INK_CRAFTING)) {

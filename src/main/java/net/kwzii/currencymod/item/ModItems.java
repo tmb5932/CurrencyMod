@@ -61,6 +61,9 @@ public class ModItems {
     public static final RegistryObject<Item> PINK_INK = ITEMS.register("pink_ink",
             () -> new Item(new Item.Properties().durability(750)));
 
+    public static final RegistryObject<Item> WHITE_INK = ITEMS.register("white_ink",
+            () -> new Item(new Item.Properties().durability(750)));
+
     public static final RegistryObject<Item> BLACK_PAPER = ITEMS.register("black_paper",
             () -> new Item(new Item.Properties().stacksTo(64)));
 

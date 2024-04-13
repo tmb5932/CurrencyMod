@@ -35,6 +35,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.EMPTY_JAR);
         simpleItem(ModItems.MAGNETIC_INK);
         simpleItem(ModItems.BLACK_INK);
+        simpleItem(ModItems.WHITE_INK);
         simpleItem(ModItems.RED_INK);
         simpleItem(ModItems.BLUE_INK);
         simpleItem(ModItems.GREEN_INK);

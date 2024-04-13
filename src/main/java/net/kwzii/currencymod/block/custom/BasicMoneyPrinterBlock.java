@@ -96,7 +96,7 @@ public class BasicMoneyPrinterBlock extends BaseEntityBlock {
             if(entity instanceof BasicMoneyPrinterBlockEntity) {
                 NetworkHooks.openScreen(((ServerPlayer)pPlayer), (BasicMoneyPrinterBlockEntity)entity, pPos); // ONLY WORKS IN 1.20.1, NOT NEWER!!
             } else {
-                throw new IllegalStateException("Our Container provider is missing!");
+                throw new IllegalStateException("BASIC PRINTER Container provider is missing!");
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());

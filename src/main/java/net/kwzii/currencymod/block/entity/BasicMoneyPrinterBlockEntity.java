@@ -212,7 +212,7 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
      * @return boolean true if item creation is possible with the current items in slots, and false otherwise
      */
     private boolean hasRecipe() {
-        boolean hasPaper = this.itemHandler.getStackInSlot(INPUT_SLOT).getItem() == Items.PAPER;
+        boolean hasPaper = this.itemHandler.getStackInSlot(INPUT_SLOT).is(ModTags.Items.PRINTING_PARCHMENT);
         boolean hasInk = this.itemHandler.getStackInSlot(INK_SLOT).is(ModTags.Items.JARS) && !this.itemHandler.getStackInSlot(INK_SLOT).is(ModItems.EMPTY_JAR.get());
         ItemStack result = getOutputItem();
         return hasPaper && hasInk && compatibleOutputSlot(result.getItem()) && outputStackHasSpace(result.getCount());
@@ -237,6 +237,8 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
             result = ModItems.PINK_PAPER.get();
         } else if (ink == ModItems.MAGNETIC_INK.get()) {
             result = ModItems.DARK_RED_PAPER.get();
+        } else if (ink == ModItems.WHITE_INK.get()) {
+            result = Items.PAPER;
         } else {
             return new ItemStack(Items.PAPER, 70); // Purposefully breaks the outputStackHasSpace(result.getCount()) boolean, making hasRecipe() return false
         }

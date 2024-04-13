@@ -44,6 +44,7 @@ public class ModTags {
         public static final TagKey<Item> BLUE_INK_CRAFTING = tag("blue_ink_crafting");
         public static final TagKey<Item> GREEN_INK_CRAFTING = tag("green_ink_crafting");
         public static final TagKey<Item> PINK_INK_CRAFTING = tag("pink_ink_crafting");
+        public static final TagKey<Item> WHITE_INK_CRAFTING = tag("white_ink_crafting");
 
         /**
          * Method to create a new custom tag for items

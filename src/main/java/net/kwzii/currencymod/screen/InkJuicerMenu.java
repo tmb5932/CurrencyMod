@@ -198,14 +198,15 @@ public class InkJuicerMenu extends AbstractContainerMenu {
      */
     public int getInkColor() {
         switch(data.get(6)) {
-            case 0 -> { return 0xFFFFFFFF; }    // White
+            case 0 -> { return 0x8b8b8b; }      // No Ink
             case 1 -> { return 0xFF000000; }    // Black
-            case 2 -> {return 0xFFFF0000; }     // Red
-            case 3 -> {return 0xFF0000FF; }     // Blue
-            case 4 -> { return 0xFF00FF00; }    // Green
-            case 5 -> {return 0xFFFF69B4; }     // Pink
-            case 6 -> { return 0xFF200000; }    // Metallic Red
-            default -> {return 0xFFFFFFFF; }    // White
+            case 2 -> { return 0xFFFFFFFF; }    // White
+            case 3 -> { return 0xFFFF0000; }    // Red
+            case 4 -> { return 0xFF0000FF; }    // Blue
+            case 5 -> { return 0xFF00FF00; }    // Green
+            case 6 -> { return 0xFFFF69B4; }    // Pink
+            case 7 -> { return 0xFF200000; }    // Metallic Red
+            default -> { return 0x8b8b8b; }     // Grey
         }
     }
 }

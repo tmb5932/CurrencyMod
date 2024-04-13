@@ -96,7 +96,7 @@ public class InkJuicerBlock extends BaseEntityBlock {
             if(entity instanceof InkJuicerBlockEntity) {
                 NetworkHooks.openScreen(((ServerPlayer)pPlayer), (InkJuicerBlockEntity)entity, pPos); // ONLY WORKS IN 1.20.1, NOT NEWER!!
             } else {
-                throw new IllegalStateException("Our Container provider is missing!");
+                throw new IllegalStateException("INK JUICER Container provider is missing!");
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());

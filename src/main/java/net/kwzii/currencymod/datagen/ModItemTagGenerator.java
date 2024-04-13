@@ -42,15 +42,21 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 ModItems.RED_INK.get(),
                 ModItems.BLUE_INK.get(),
                 ModItems.GREEN_INK.get(),
-                ModItems.PINK_INK.get()
+                ModItems.PINK_INK.get(),
+                ModItems.WHITE_INK.get()
         );
 
         this.tag(ModTags.Items.BILLS).add(
                 ModItems.DOLLAR_BILL.get());
 
         this.tag(ModTags.Items.PRINTING_PARCHMENT).add(
-                Items.MAP,
-                Items.PAPER
+                Items.PAPER,
+                ModItems.BLACK_PAPER.get(),
+                ModItems.RED_PAPER.get(),
+                ModItems.BLUE_PAPER.get(),
+                ModItems.GREEN_PAPER.get(),
+                ModItems.PINK_PAPER.get(),
+                ModItems.DARK_RED_PAPER.get()
         );
 
         this.tag(ModTags.Items.INK_CREATING_ITEMS).add(
@@ -68,8 +74,12 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 // PINK INK
                 Items.PINK_TULIP,
                 Items.PEONY,
+                Items.PINK_PETALS,
                 Items.PINK_DYE,
-                Items.PINK_PETALS);
+                // WHITE INK
+                Items.LILY_OF_THE_VALLEY,
+                Items.WHITE_DYE
+                );
 
         this.tag(ModTags.Items.BLACK_INK_CRAFTING).add(
                 Items.INK_SAC,
@@ -95,6 +105,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 Items.PEONY,
                 Items.PINK_DYE,
                 Items.PINK_PETALS
+        );
+
+        this.tag(ModTags.Items.WHITE_INK_CRAFTING).add(
+                Items.LILY_OF_THE_VALLEY,
+                Items.WHITE_DYE
         );
     }
 }
