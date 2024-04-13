@@ -1,4 +1,4 @@
-# Hard Cash Mod
+# Currency Mod
 
 This is a minecraft mod about physical cash :)
 

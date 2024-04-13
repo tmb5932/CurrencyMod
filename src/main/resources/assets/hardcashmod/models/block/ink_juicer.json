@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [48, 48],
 	"textures": {
-		"0": "hardcashmod:block/ink_juicer",
-		"particle": "hardcashmod:block/ink_juicer"
+		"0": "currencymod:block/ink_juicer",
+		"particle": "currencymod:block/ink_juicer"
 	},
 	"elements": [
 		{
