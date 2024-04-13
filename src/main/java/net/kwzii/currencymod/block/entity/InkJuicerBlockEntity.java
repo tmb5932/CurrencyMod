@@ -345,11 +345,22 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
      */
     private void addLiquid() {
         ItemStack inputStack = this.itemHandler.getStackInSlot(INPUT_SLOT);
-        this.itemHandler.extractItem(INPUT_SLOT, 1, false);
-        if (amtLiquidStored + 2 <= liquidMaxStored) {
-            amtLiquidStored += 2;
-        } else {
-            amtLiquidStored = liquidMaxStored;
+
+        if (inputStack.is(ModTags.Items.INK_CREATING_ITEMS)) {
+            this.itemHandler.extractItem(INPUT_SLOT, 1, false);
+            if (amtLiquidStored + 2 <= liquidMaxStored) {
+                amtLiquidStored += 2;
+            } else {
+                amtLiquidStored = liquidMaxStored;
+            }
+        }  else if (inputStack.is(ModTags.Items.JARS)) {
+            if (inputStack.getDamageValue() > inputStack.getMaxDamage() - 100) {
+                this.itemHandler.extractItem(INPUT_SLOT, 1, false);
+                this.itemHandler.insertItem(INPUT_SLOT, new ItemStack(ModItems.EMPTY_JAR.get(), 1), false);
+            } else {
+                inputStack.setDamageValue(inputStack.getDamageValue() + 100);
+            }
+            amtLiquidStored++;
         }
         if (liquidTypeStored == LiquidType.NONE) {
             liquidTypeStored = getLiquidType(inputStack);
@@ -370,7 +381,8 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
      */
     private boolean hasRecipe() {
         ItemStack inputItemStack = this.itemHandler.getStackInSlot(INPUT_SLOT);
-        boolean canMakeInk = inputItemStack.is(ModTags.Items.INK_CREATING_ITEMS);
+        boolean canMakeInk = inputItemStack.is(ModTags.Items.INK_CREATING_ITEMS)
+                || (inputItemStack.is(ModTags.Items.JARS) && inputItemStack.getItem() != ModItems.EMPTY_JAR.get());
 
         return canMakeInk && (amtLiquidStored < liquidMaxStored) && itemMatchesInk(inputItemStack);
     }
@@ -425,19 +437,22 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
      * @return the LiquidType that matches the passed in item
      */
     private LiquidType getLiquidType(ItemStack itemStack) {
-        if (itemStack.is(ModTags.Items.BLACK_INK_CRAFTING)) {
+        if (itemStack.is(ModTags.Items.BLACK_INK_CRAFTING) || itemStack.getItem() == ModItems.BLACK_INK.get()) {
             return LiquidType.BLACK;
-        } else if (itemStack.is(ModTags.Items.WHITE_INK_CRAFTING)) {
+        } else if (itemStack.is(ModTags.Items.WHITE_INK_CRAFTING) || itemStack.getItem() == ModItems.WHITE_INK.get()) {
             return LiquidType.WHITE;
-        } else if (itemStack.is(ModTags.Items.RED_INK_CRAFTING)) {
+        } else if (itemStack.is(ModTags.Items.RED_INK_CRAFTING) || itemStack.getItem() == ModItems.RED_INK.get()) {
             return LiquidType.RED;
-        } else if (itemStack.is(ModTags.Items.BLUE_INK_CRAFTING)) {
+        } else if (itemStack.is(ModTags.Items.BLUE_INK_CRAFTING) || itemStack.getItem() == ModItems.BLUE_INK.get()) {
             return LiquidType.BLUE;
-        } else if (itemStack.is(ModTags.Items.GREEN_INK_CRAFTING)) {
+        } else if (itemStack.is(ModTags.Items.GREEN_INK_CRAFTING) || itemStack.getItem() == ModItems.GREEN_INK.get()) {
             return LiquidType.GREEN;
-        } else if (itemStack.is(ModTags.Items.PINK_INK_CRAFTING)) {
+        } else if (itemStack.is(ModTags.Items.PINK_INK_CRAFTING) || itemStack.getItem() == ModItems.PINK_INK.get()) {
             return LiquidType.PINK;
-        } else {
+        } else if (itemStack.getItem() == ModItems.MAGNETIC_INK.get()) {
+            return  LiquidType.MAGNETIC;
+        }
+        else {
             return LiquidType.NONE;
         }
     }
