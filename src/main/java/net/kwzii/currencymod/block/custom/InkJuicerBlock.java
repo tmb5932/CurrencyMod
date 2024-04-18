@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class InkJuicerBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final VoxelShape SHAPE = Block.box(0.5, 0, 0.5, 15.5, 18, 15.5);
+    public static final VoxelShape SHAPE = Block.box(0.5, 0, 0.5, 15.5, 17.25, 15.5);
     public static final IntegerProperty COLOR = IntegerProperty.create("color", 0, 7);
     /**
      * Creator for Ink Juicer block
