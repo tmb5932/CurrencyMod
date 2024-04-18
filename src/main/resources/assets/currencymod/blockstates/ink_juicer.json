@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "currencymod:block/ink_juicer" },
+    "facing=east": { "model": "currencymod:block/ink_juicer", "y": 90 },
+    "facing=south": { "model": "currencymod:block/ink_juicer", "y": 180 },
+    "facing=west": { "model": "currencymod:block/ink_juicer", "y": 270 }
+  }
+}

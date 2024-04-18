@@ -7,15 +7,18 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -27,7 +30,8 @@ import org.jetbrains.annotations.Nullable;
  * @author Travis Brown
  */
 public class InkJuicerBlock extends BaseEntityBlock {
-    public static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 19, 13);
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 27, 16);
 
     /**
      * Creator for Ink Juicer block
@@ -77,6 +81,50 @@ public class InkJuicerBlock extends BaseEntityBlock {
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
+    // Facing Methods
+    /**
+     * Override method to get the placement state for the block
+     * @param pContext the block placement context
+     * @return the block state it should be placed in
+     */
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    }
+
+    /**
+     * Overrides the rotate block method
+     * @param state the block state
+     * @param level the level
+     * @param pos the block position
+     * @param direction the direction to rotate
+     * @return the direction to set the block
+     */
+    @Override
+    public BlockState rotate(BlockState state, LevelAccessor level, BlockPos pos, Rotation direction) {
+        return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
+    }
+    /**
+     * Method to set the mirror placement value
+     * @param pState the block state
+     * @param pMirror the mirror direction
+     * @return the direction for the block to be placed when mirror placing
+     */
+    @Override
+    public BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+    }
+
+    /**
+     * Method to add the FACING direction to the block pBuilder
+     * @param pBuilder the state definition builder of the block and the block state
+     */
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(FACING);
     }
 
     /**

@@ -32,11 +32,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.RAW_SAPPHIRE_BLOCK);
         blockWithItem(ModBlocks.SAPPHIRE_ORE);
 
+        // Commented out block registration as the custom model and block states are both manually added
+    /*
         simpleBlockWithItem(ModBlocks.BASIC_MONEY_PRINTER.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/basic_money_printer")));
 
         simpleBlockWithItem(ModBlocks.INK_JUICER.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/ink_juicer")));
+    */
     }
 
     /**

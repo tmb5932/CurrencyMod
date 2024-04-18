@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "currencymod:block/basic_money_printer" },
+    "facing=east": { "model": "currencymod:block/basic_money_printer", "y": 90 },
+    "facing=south": { "model": "currencymod:block/basic_money_printer", "y": 180 },
+    "facing=west": { "model": "currencymod:block/basic_money_printer", "y": 270 }
+  }
+}
