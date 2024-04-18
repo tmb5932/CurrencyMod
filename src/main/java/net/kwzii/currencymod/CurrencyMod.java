@@ -100,7 +100,7 @@ public class CurrencyMod {
             MenuScreens.register(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), BasicMoneyPrinterScreen::new);
             MenuScreens.register(ModMenuTypes.INK_JUICER_MENU.get(), InkJuicerScreen::new);
 
-            // Sets render of object to translucent so opaque things will be see through
+            // Sets render of object to translucent so opaque things will be seen through
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.INK_JUICER.get(), RenderType.translucent());
         }
     }
