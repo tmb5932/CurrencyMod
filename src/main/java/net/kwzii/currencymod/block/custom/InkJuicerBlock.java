@@ -36,7 +36,7 @@ public class InkJuicerBlock extends BaseEntityBlock {
     public static final IntegerProperty COLOR = IntegerProperty.create("color", 0, 7);
     /**
      * Creator for Ink Juicer block
-     * @param pProperties the block properties[
+     * @param pProperties the block properties
      */
     public InkJuicerBlock(Properties pProperties) {
         super(pProperties);

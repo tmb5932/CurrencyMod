@@ -84,6 +84,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('W', ItemTags.PLANKS)
                 .unlockedBy(getHasName(Items.NETHERITE_INGOT), has(Items.NETHERITE_INGOT))
                 .save(consumer);
+
+        // INK JUICER RECIPE
+        ShapedRecipeBuilder.shaped(RecipeCategory.BREWING, ModBlocks.INK_JUICER.get())
+                .pattern("GPG")
+                .pattern("G G")
+                .pattern("WWW")
+                .define('G', Items.GLASS)
+                .define('P', Items.PISTON)
+                .define('W', ItemTags.PLANKS)
+                .unlockedBy(getHasName(Items.GLASS), has(Items.GLASS))
+                .save(consumer);
     }
 
     /**
