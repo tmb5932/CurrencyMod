@@ -59,7 +59,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         // Creates Item models for blocks that have a non data gen block state and model
         withExistingParent("basic_money_printer", modLoc("block/basic_money_printer"));
-        withExistingParent("ink_juicer", modLoc("block/ink_juicer"));
+        withExistingParent("ink_juicer", modLoc("block/ink_juicers/ink_juicer0"));
     }
 
     /**

@@ -273,16 +273,6 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         } else {
             outputProgress = 0;
         }
-        switch(liquidTypeStored) {
-            case NONE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 0)); // Blank
-            case BLACK -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 1)); // Black
-            case WHITE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 2)); // White
-            case RED -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 3)); // Red
-            case BLUE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 4)); // Blue
-            case GREEN -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 5)); // Green
-            case PINK -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 6)); // Pink
-            case MAGNETIC -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 7)); // Dark Red
-        }
     }
 
     /**
@@ -329,6 +319,7 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         }
         if (amtLiquidStored == 0) {
             liquidTypeStored = LiquidType.NONE;
+            setTextureColor();
         }
     }
 
@@ -375,6 +366,7 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         }
         if (liquidTypeStored == LiquidType.NONE) {
             liquidTypeStored = getLiquidType(inputStack);
+            setTextureColor();
         }
     }
 
@@ -442,6 +434,21 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
         return false;
     }
 
+    /**
+     * Method to change the color of the liquid inside the storage tanks color
+     */
+    private void setTextureColor() {
+        switch(liquidTypeStored) {
+            case NONE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, LiquidType.NONE.getIntVal())); // Blank
+            case BLACK -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, LiquidType.BLACK.getIntVal())); // Black
+            case WHITE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, LiquidType.WHITE.getIntVal())); // White
+            case RED -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, LiquidType.RED.getIntVal())); // Red
+            case BLUE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, LiquidType.BLUE.getIntVal())); // Blue
+            case GREEN -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, LiquidType.GREEN.getIntVal())); // Green
+            case PINK -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, LiquidType.PINK.getIntVal())); // Pink
+            case MAGNETIC -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, LiquidType.MAGNETIC.getIntVal())); // Dark Red
+        }
+    }
     /**
      * Gets liquid type that the given item produces
      * @param itemStack the item to find liquid equivalent of
