@@ -2,6 +2,7 @@ package net.kwzii.currencymod.screen;
 
 import net.kwzii.currencymod.block.ModBlocks;
 import net.kwzii.currencymod.block.entity.InkJuicerBlockEntity;
+import net.kwzii.currencymod.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Ink Juicer Menu Class
@@ -49,7 +51,12 @@ public class InkJuicerMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 48, 16));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 48, 52));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 48, 52) {
+                @Override
+                public boolean mayPlace(@NotNull ItemStack stack) {
+                    return stack.is(ModTags.Items.JARS);
+                }
+            });
         });
 
         addDataSlots(data);

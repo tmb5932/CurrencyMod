@@ -19,6 +19,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -31,14 +33,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class InkJuicerBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 27, 16);
-
+    public static final VoxelShape SHAPE = Block.box(0.5, 0, 0.5, 15.5, 18, 15.5);
+    public static final IntegerProperty COLOR = IntegerProperty.create("color", 0, 7);
     /**
      * Creator for Ink Juicer block
      * @param pProperties the block properties[
      */
     public InkJuicerBlock(Properties pProperties) {
         super(pProperties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(COLOR, 0)); // Set default color to blank
     }
 
     /**
@@ -125,6 +128,12 @@ public class InkJuicerBlock extends BaseEntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);
+        pBuilder.add(COLOR);
+    }
+
+    // Method to set block state color based on your variable
+    public BlockState setColor(int color) {
+        return this.defaultBlockState().setValue(COLOR, color);
     }
 
     /**

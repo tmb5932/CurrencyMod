@@ -1,8 +1,43 @@
 {
   "variants": {
-    "facing=north": { "model": "currencymod:block/ink_juicer" },
-    "facing=east": { "model": "currencymod:block/ink_juicer", "y": 90 },
-    "facing=south": { "model": "currencymod:block/ink_juicer", "y": 180 },
-    "facing=west": { "model": "currencymod:block/ink_juicer", "y": 270 }
+    "facing=north,color=0": { "model": "currencymod:block/ink_juicers/ink_juicer0" },
+    "facing=east,color=0": { "model": "currencymod:block/ink_juicers/ink_juicer0", "y": 90 },
+    "facing=south,color=0": { "model": "currencymod:block/ink_juicers/ink_juicer0", "y": 180 },
+    "facing=west,color=0": { "model": "currencymod:block/ink_juicers/ink_juicer0", "y": 270 },
+
+    "facing=north,color=1": { "model": "currencymod:block/ink_juicers/ink_juicer1" },
+    "facing=east,color=1": { "model": "currencymod:block/ink_juicers/ink_juicer1", "y": 90 },
+    "facing=south,color=1": { "model": "currencymod:block/ink_juicers/ink_juicer1", "y": 180 },
+    "facing=west,color=1": { "model": "currencymod:block/ink_juicers/ink_juicer1", "y": 270 },
+
+    "facing=north,color=2": { "model": "currencymod:block/ink_juicers/ink_juicer2" },
+    "facing=east,color=2": { "model": "currencymod:block/ink_juicers/ink_juicer2", "y": 90 },
+    "facing=south,color=2": { "model": "currencymod:block/ink_juicers/ink_juicer2", "y": 180 },
+    "facing=west,color=2": { "model": "currencymod:block/ink_juicers/ink_juicer2", "y": 270 },
+
+    "facing=north,color=3": { "model": "currencymod:block/ink_juicers/ink_juicer3" },
+    "facing=east,color=3": { "model": "currencymod:block/ink_juicers/ink_juicer3", "y": 90 },
+    "facing=south,color=3": { "model": "currencymod:block/ink_juicers/ink_juicer3", "y": 180 },
+    "facing=west,color=3": { "model": "currencymod:block/ink_juicers/ink_juicer3", "y": 270 },
+
+    "facing=north,color=4": { "model": "currencymod:block/ink_juicers/ink_juicer4" },
+    "facing=east,color=4": { "model": "currencymod:block/ink_juicers/ink_juicer4", "y": 90 },
+    "facing=south,color=4": { "model": "currencymod:block/ink_juicers/ink_juicer4", "y": 180 },
+    "facing=west,color=4": { "model": "currencymod:block/ink_juicers/ink_juicer4", "y": 270 },
+
+    "facing=north,color=5": { "model": "currencymod:block/ink_juicers/ink_juicer5" },
+    "facing=east,color=5": { "model": "currencymod:block/ink_juicers/ink_juicer5", "y": 90 },
+    "facing=south,color=5": { "model": "currencymod:block/ink_juicers/ink_juicer5", "y": 180 },
+    "facing=west,color=5": { "model": "currencymod:block/ink_juicers/ink_juicer5", "y": 270 },
+
+    "facing=north,color=6": { "model": "currencymod:block/ink_juicers/ink_juicer6" },
+    "facing=east,color=6": { "model": "currencymod:block/ink_juicers/ink_juicer6", "y": 90 },
+    "facing=south,color=6": { "model": "currencymod:block/ink_juicers/ink_juicer6", "y": 180 },
+    "facing=west,color=6": { "model": "currencymod:block/ink_juicers/ink_juicer6", "y": 270 },
+
+    "facing=north,color=7": { "model": "currencymod:block/ink_juicers/ink_juicer7" },
+    "facing=east,color=7": { "model": "currencymod:block/ink_juicers/ink_juicer7", "y": 90 },
+    "facing=south,color=7": { "model": "currencymod:block/ink_juicers/ink_juicer7", "y": 180 },
+    "facing=west,color=7": { "model": "currencymod:block/ink_juicers/ink_juicer7", "y": 270 }
   }
 }

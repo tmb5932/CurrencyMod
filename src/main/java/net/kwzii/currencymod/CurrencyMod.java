@@ -9,6 +9,8 @@ import net.kwzii.currencymod.screen.BasicMoneyPrinterScreen;
 import net.kwzii.currencymod.screen.InkJuicerScreen;
 import net.kwzii.currencymod.screen.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -94,8 +96,12 @@ public class CurrencyMod {
          */
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            // Registers Menus with the screens
             MenuScreens.register(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), BasicMoneyPrinterScreen::new);
             MenuScreens.register(ModMenuTypes.INK_JUICER_MENU.get(), InkJuicerScreen::new);
+
+            // Sets render of object to translucent so opaque things will be see through
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.INK_JUICER.get(), RenderType.translucent());
         }
     }
 }

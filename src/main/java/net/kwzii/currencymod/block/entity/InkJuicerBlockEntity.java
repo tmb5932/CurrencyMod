@@ -1,5 +1,6 @@
 package net.kwzii.currencymod.block.entity;
 
+import net.kwzii.currencymod.block.custom.InkJuicerBlock;
 import net.kwzii.currencymod.item.ModItems;
 import net.kwzii.currencymod.screen.InkJuicerMenu;
 import net.kwzii.currencymod.util.ModTags;
@@ -271,6 +272,16 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
             }
         } else {
             outputProgress = 0;
+        }
+        switch(liquidTypeStored) {
+            case NONE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 0)); // Blank
+            case BLACK -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 1)); // Black
+            case WHITE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 2)); // White
+            case RED -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 3)); // Red
+            case BLUE -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 4)); // Blue
+            case GREEN -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 5)); // Green
+            case PINK -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 6)); // Pink
+            case MAGNETIC -> this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(InkJuicerBlock.COLOR, 7)); // Dark Red
         }
     }
 
