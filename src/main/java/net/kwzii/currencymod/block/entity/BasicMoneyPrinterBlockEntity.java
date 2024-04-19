@@ -133,7 +133,7 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
     }
 
     /**
-     * Creates GUI menu for the printer block
+     * Creates GUI menu for the printer block entity
      * @param pContainerId the int container ID
      * @param inv the player inventory
      * @param player the player
@@ -151,7 +151,7 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
      */
     @Override
     protected void saveAdditional(CompoundTag pTag) {
-        pTag.put("inventory", itemHandler.serializeNBT());
+        pTag.put("basic_money_printer.inventory", itemHandler.serializeNBT());
         pTag.putInt("basic_money_printer.progress", progress);
         super.saveAdditional(pTag);
     }
@@ -163,7 +163,7 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        itemHandler.deserializeNBT(pTag.getCompound("inventory"));
+        itemHandler.deserializeNBT(pTag.getCompound("basic_money_printer.inventory"));
         progress = pTag.getInt("basic_money_printer.progress");
     }
 
@@ -199,7 +199,7 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
      * Crafts the item and removes one of the items that it was crafted from
      */
     private void craftItem() {
-//        ItemStack result = new ItemStack(ModItems.DOLLAR_BILL.get(), 8); // todo ADD ANOTHER BLOCK ENTITY TO STAMP/CUT PAPER TO CREATE DOLLARS
+//        ItemStack result = new ItemStack(ModItems.ONE_DOLLAR_BILL.get(), 8); // todo ADD ANOTHER BLOCK ENTITY TO STAMP/CUT PAPER TO CREATE DOLLARS
         ItemStack result = getOutputItem();
         this.itemHandler.extractItem(INPUT_SLOT, 1, false);
 

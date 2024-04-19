@@ -89,7 +89,7 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 26; // This is the height in pixels of your arrow
+        int progressArrowSize = 26; // Length of arrow in pixels
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }

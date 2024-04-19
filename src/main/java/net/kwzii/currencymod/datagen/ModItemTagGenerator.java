@@ -47,7 +47,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         );
 
         this.tag(ModTags.Items.BILLS).add(
-                ModItems.DOLLAR_BILL.get());
+                ModItems.ONE_DOLLAR_BILL.get()
+        );
 
         this.tag(ModTags.Items.PRINTING_PARCHMENT).add(
                 Items.PAPER,
@@ -57,6 +58,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 ModItems.GREEN_PAPER.get(),
                 ModItems.PINK_PAPER.get(),
                 ModItems.DARK_RED_PAPER.get()
+        );
+
+        this.tag(ModTags.Items.STAMPS).add(
+                ModItems.MONEY_STAMP.get(),
+                ModItems.RECIPE_STAMP.get()
         );
 
         this.tag(ModTags.Items.INK_CREATING_ITEMS).add(

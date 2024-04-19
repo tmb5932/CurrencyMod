@@ -37,6 +37,7 @@ public class ModTags {
         public static final TagKey<Item> BILLS = tag("cash_bills");
         public static final TagKey<Item> JARS = tag("ink_jars");
         public static final TagKey<Item> PRINTING_PARCHMENT = tag("printing_parchment");
+        public static final TagKey<Item> STAMPS = tag("stamps");
 
         public static final TagKey<Item> INK_CREATING_ITEMS = tag("ink_crafting");
         public static final TagKey<Item> BLACK_INK_CRAFTING = tag("black_ink_crafting");

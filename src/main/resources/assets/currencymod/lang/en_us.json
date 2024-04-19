@@ -1,11 +1,16 @@
 {
+  "item.currencymod.maxwell": "Maxwell",
+
   "item.currencymod.sapphire": "Sapphire",
   "item.currencymod.raw_sapphire": "Raw Sapphire",
-  "item.currencymod.maxwell": "Maxwell",
+
   "item.currencymod.metal_detector": "Metal Detector",
+
   "item.currencymod.dice": "Dice",
   "item.currencymod.double_dice": "Pair of Dice",
-  "item.currencymod.dollar_bill": "One Dollar Bill",
+
+  "item.currencymod.one_dollar_bill": "One Dollar Bill",
+
   "item.currencymod.magnetic_ink": "Jar of Magnetic Ink",
   "item.currencymod.black_ink": "Jar of Black Ink",
   "item.currencymod.white_ink": "Jar of White Ink",
@@ -14,12 +19,16 @@
   "item.currencymod.green_ink": "Jar of Green Ink",
   "item.currencymod.pink_ink": "Jar of Pink Ink",
   "item.currencymod.empty_jar": "An Empty Jar",
+
   "item.currencymod.black_paper": "Black Paper",
   "item.currencymod.red_paper": "Red Paper",
   "item.currencymod.blue_paper": "Blue Paper",
   "item.currencymod.green_paper": "Green Paper",
   "item.currencymod.pink_paper": "Pink Paper",
   "item.currencymod.dark_red_paper": "Dark Red Paper",
+
+  "item.currencymod.money_stamp": "Money Stamp",
+  "item.currencymod.recipe_stamp": "Recipe Paper Stamp",
 
   "tooltip.currencymod.metal_detector.tooltip": "Finds valuables underground!",
 
@@ -29,6 +38,7 @@
 
   "block.currencymod.basic_money_printer": "Basic Printer",
   "block.currencymod.ink_juicer": "Ink Juicer",
+  "block.currencymod.stamper": "Stamper",
 
   "creativetab.currencymod_tab": "Kwzii's Currency Mod"
 }
