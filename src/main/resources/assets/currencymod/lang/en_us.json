@@ -10,6 +10,17 @@
   "item.currencymod.double_dice": "Pair of Dice",
 
   "item.currencymod.one_dollar_bill": "One Dollar Bill",
+  "item.currencymod.ten_dollar_bill": "A Ten Dollar Bill",
+  "item.currencymod.twenty_dollar_bill": "A Twenty Dollar Bill",
+  "item.currencymod.fifty_dollar_bill": "A Fifty Dollar Bill",
+  "item.currencymod.hundred_dollar_bill": "One Hundred Dollar Bill",
+
+  "item.currencymod.black_fake_money": "Black Toy Money",
+  "item.currencymod.white_fake_money": "White Monopoly Money",
+  "item.currencymod.red_fake_money": "Red Monopoly Money",
+  "item.currencymod.blue_fake_money": "Blue Monopoly Money",
+  "item.currencymod.green_fake_money": "Green Monopoly Money",
+  "item.currencymod.pink_fake_money": "Pink Monopoly Money",
 
   "item.currencymod.magnetic_ink": "Jar of Magnetic Ink",
   "item.currencymod.black_ink": "Jar of Black Ink",
@@ -29,6 +40,13 @@
 
   "item.currencymod.money_stamp": "Money Stamp",
   "item.currencymod.recipe_stamp": "Recipe Paper Stamp",
+
+  "item.currencymod.white_recipe_paper": "Recipe Paper",
+  "item.currencymod.black_recipe_paper": "Black Recipe Paper",
+  "item.currencymod.red_recipe_paper": "Red Recipe Paper",
+  "item.currencymod.blue_recipe_paper": "Blue Recipe Paper",
+  "item.currencymod.green_recipe_paper": "Green Recipe Paper",
+  "item.currencymod.pink_recipe_paper": "Pink Recipe Paper",
 
   "tooltip.currencymod.metal_detector.tooltip": "Finds valuables underground!",
 

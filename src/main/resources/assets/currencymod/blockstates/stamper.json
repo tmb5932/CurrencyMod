@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "currencymod:block/stamper" },
+    "facing=east": { "model": "currencymod:block/stamper", "y": 90 },
+    "facing=south": { "model": "currencymod:block/stamper", "y": 180 },
+    "facing=west": { "model": "currencymod:block/stamper", "y": 270 }
+  }
+}

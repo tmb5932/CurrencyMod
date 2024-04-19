@@ -24,6 +24,9 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<InkJuicerMenu>> INK_JUICER_MENU =
             registerMenuType("ink_juicer_menu", InkJuicerMenu::new);
 
+    public static final RegistryObject<MenuType<StamperMenu>> STAMPER_MENU =
+            registerMenuType("stamper_menu", StamperMenu::new);
+
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

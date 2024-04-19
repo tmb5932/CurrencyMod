@@ -8,6 +8,7 @@ import net.kwzii.currencymod.item.ModItems;
 import net.kwzii.currencymod.screen.BasicMoneyPrinterScreen;
 import net.kwzii.currencymod.screen.InkJuicerScreen;
 import net.kwzii.currencymod.screen.ModMenuTypes;
+import net.kwzii.currencymod.screen.StamperScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -99,6 +100,7 @@ public class CurrencyMod {
             // Registers Menus with the screens
             MenuScreens.register(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), BasicMoneyPrinterScreen::new);
             MenuScreens.register(ModMenuTypes.INK_JUICER_MENU.get(), InkJuicerScreen::new);
+            MenuScreens.register(ModMenuTypes.STAMPER_MENU.get(), StamperScreen::new);
 
             // Sets render of object to translucent so opaque things will be seen through
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.INK_JUICER.get(), RenderType.translucent());

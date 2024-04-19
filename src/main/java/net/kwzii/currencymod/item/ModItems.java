@@ -28,6 +28,7 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     // Currency Items
+    // todo: Maybe have them colored? one_dollar_bill -> green_dollar_bill; ten_dollar_bill -> blue_dollar_bill...
     public static final RegistryObject<Item> ONE_DOLLAR_BILL = ITEMS.register("one_dollar_bill",
             () -> new DollarBillItem(new Item.Properties(), 1));
 
@@ -42,6 +43,26 @@ public class ModItems {
 
     public static final RegistryObject<Item> HUNDRED_DOLLAR_BILL = ITEMS.register("hundred_dollar_bill",
             () -> new DollarBillItem(new Item.Properties(), 100));
+
+    // Fake Currency Items
+    // todo make models for these V
+    public static final RegistryObject<Item> BLACK_FAKE_MONEY = ITEMS.register("black_fake_money",
+            () -> new DollarBillItem(new Item.Properties(), 0));
+
+    public static final RegistryObject<Item> WHITE_FAKE_MONEY = ITEMS.register("white_fake_money",
+            () -> new DollarBillItem(new Item.Properties(), 0));
+
+    public static final RegistryObject<Item> RED_FAKE_MONEY = ITEMS.register("black_fake_money",
+            () -> new DollarBillItem(new Item.Properties(), 0));
+
+    public static final RegistryObject<Item> BLUE_FAKE_MONEY = ITEMS.register("blue_fake_money",
+            () -> new DollarBillItem(new Item.Properties(), 0));
+
+    public static final RegistryObject<Item> GREEN_FAKE_MONEY = ITEMS.register("green_fake_money",
+            () -> new DollarBillItem(new Item.Properties(), 0));
+
+    public static final RegistryObject<Item> PINK_FAKE_MONEY = ITEMS.register("pink_fake_money",
+            () -> new DollarBillItem(new Item.Properties(), 0));
 
     // Ore Searching Item
     public static final RegistryObject<Item> METAL_DETECTOR = ITEMS.register("metal_detector",
@@ -106,6 +127,24 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(1)));
 
     // Recipe Paper Items
+    // todo make models for these V
+    public static final RegistryObject<Item> BLACK_RECIPE_PAPER = ITEMS.register("black_recipe_paper",
+            () -> new RecipePaperItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> WHITE_RECIPE_PAPER = ITEMS.register("white_recipe_paper",
+            () -> new RecipePaperItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> RED_RECIPE_PAPER = ITEMS.register("red_recipe_paper",
+            () -> new RecipePaperItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_RECIPE_PAPER = ITEMS.register("blue_recipe_paper",
+            () -> new RecipePaperItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> GREEN_RECIPE_PAPER = ITEMS.register("green_recipe_paper",
+            () -> new RecipePaperItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_RECIPE_PAPER = ITEMS.register("pink_recipe_paper",
+            () -> new RecipePaperItem(new Item.Properties()));
 
 
     /**

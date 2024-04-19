@@ -39,6 +39,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlockWithItem(ModBlocks.INK_JUICER.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/ink_juicer")));
+
+        simpleBlockWithItem(ModBlocks.STAMPER.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/stamper")));
     */
     }
 
