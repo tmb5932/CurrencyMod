@@ -9,40 +9,21 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-/**
- * Screen rendering class for the Stamper Menu
- */
-public class StamperScreen extends AbstractContainerScreen<StamperMenu> {
+public class WalletScreen extends AbstractContainerScreen<WalletMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(CurrencyMod.MOD_ID, "textures/gui/stamper_gui.png"); //todo actually put a GUI here
+            new ResourceLocation(CurrencyMod.MOD_ID, "textures/gui/wallet_gui.png");
 
-    /**
-     * Constructor for the stamper screen
-     * @param pMenu the menu to be shown
-     * @param pPlayerInventory the player inventory
-     * @param pTitle the title of the screen
-     */
-    public StamperScreen(StamperMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-        super(pMenu, pPlayerInventory, pTitle);
+    public WalletScreen(WalletMenu pMenu, Inventory inv, Component title) {
+        super(pMenu, inv, title);
     }
 
-    /**
-     * Method to initialize the screen
-     */
     @Override
     protected void init() {
         super.init();
+        this.titleLabelY += 25;
         this.inventoryLabelY = 10000;
-        this.titleLabelY = 10000;
     }
 
-    /**
-     * Method to render the graphics
-     * @param guiGraphics the gui graphics
-     * @param pPartialTick float value partial tick
-     * @param pMouseX int the mouse x value
-     * @param pMouseY int the mouse y value
-     */
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -52,20 +33,6 @@ public class StamperScreen extends AbstractContainerScreen<StamperMenu> {
         int y = (height - imageHeight) / 2;
 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-
-        renderProgressArrow(guiGraphics, x, y);
-    }
-
-    /**
-     * Method to render progress arrow
-     * @param guiGraphics the gui graphics
-     * @param x the starting x value
-     * @param y the starting y value
-     */
-    private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
-        if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 74, y + 48, 176, 0, menu.getScaledProgress(), 8);
-        }
     }
 
     /**

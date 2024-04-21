@@ -59,7 +59,28 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.METAL_DETECTOR);
 
         simpleItem(ModItems.ONE_DOLLAR_BILL);
+        simpleItem(ModItems.TEN_DOLLAR_BILL);
+        simpleItem(ModItems.TWENTY_DOLLAR_BILL);
+        simpleItem(ModItems.FIFTY_DOLLAR_BILL);
+        simpleItem(ModItems.HUNDRED_DOLLAR_BILL);
 
+        simpleItem(ModItems.BLACK_FAKE_MONEY);
+        simpleItem(ModItems.WHITE_FAKE_MONEY);
+        simpleItem(ModItems.RED_FAKE_MONEY);
+        simpleItem(ModItems.BLUE_FAKE_MONEY);
+        simpleItem(ModItems.GREEN_FAKE_MONEY);
+        simpleItem(ModItems.PINK_FAKE_MONEY);
+        simpleItem(ModItems.DARK_RED_FAKE_MONEY);
+
+        simpleItem(ModItems.BLACK_RECIPE_PAPER);
+        simpleItem(ModItems.WHITE_RECIPE_PAPER);
+        simpleItem(ModItems.RED_RECIPE_PAPER);
+        simpleItem(ModItems.BLUE_RECIPE_PAPER);
+        simpleItem(ModItems.GREEN_RECIPE_PAPER);
+        simpleItem(ModItems.PINK_RECIPE_PAPER);
+        simpleItem(ModItems.DARK_RED_RECIPE_PAPER);
+
+        simpleItem(ModItems.WALLET);
         // Creates Item models for blocks that have a non data gen block state and model
         withExistingParent("basic_money_printer", modLoc("block/basic_money_printer"));
         withExistingParent("ink_juicer", modLoc("block/ink_juicers/ink_juicer0"));

@@ -199,7 +199,6 @@ public class BasicMoneyPrinterBlockEntity extends BlockEntity implements MenuPro
      * Crafts the item and removes one of the items that it was crafted from
      */
     private void craftItem() {
-//        ItemStack result = new ItemStack(ModItems.ONE_DOLLAR_BILL.get(), 8); // todo ADD ANOTHER BLOCK ENTITY TO STAMP/CUT PAPER TO CREATE DOLLARS
         ItemStack result = getOutputItem();
         this.itemHandler.extractItem(INPUT_SLOT, 1, false);
 

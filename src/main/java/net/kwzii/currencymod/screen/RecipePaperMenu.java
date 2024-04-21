@@ -1,102 +1,79 @@
 package net.kwzii.currencymod.screen;
 
-import net.kwzii.currencymod.block.ModBlocks;
-import net.kwzii.currencymod.block.entity.StamperBlockEntity;
+import net.kwzii.currencymod.item.entity.RecipePaperItemEntity;
 import net.kwzii.currencymod.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * The Stamper Menu class
- */
-public class StamperMenu extends AbstractContainerMenu {
-    public final StamperBlockEntity blockEntity;
-    private final Level level;
+public class RecipePaperMenu extends AbstractContainerMenu {
+    public final RecipePaperItemEntity itemEntity;
     private final ContainerData data;
+    private final Level level;
+    private final double xCoord;
+    private final double yCoord;
+    private final double zCoord;
 
-    /**
-     * Constructor for the Stamper Menu
-     * Calls to other constructor
-     */
-    public StamperMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+    public RecipePaperMenu(int id, Inventory inv, FriendlyByteBuf friendlyByteBuf) {
+        this(id, inv, inv.player.getItemInHand(InteractionHand.MAIN_HAND).getEntityRepresentation(), new SimpleContainerData(3));
     }
 
-    /**
-     * Constructor for Stamper Menu
-     * Creates menu, calls methods to add the player inv and hotbar, and registers item slots in the menu
-     * @param pContainerId the Container ID
-     * @param inv the player inventory
-     * @param entity the block entity
-     * @param data the container data
-     */
-    public StamperMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.STAMPER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 4);
-        blockEntity = ((StamperBlockEntity) entity);
-        this.level = inv.player.level();
+    public RecipePaperMenu(int pContainerId, Inventory inv, Entity entity, ContainerData data) {
+        super(ModMenuTypes.RECIPE_PAPER_MENU.get(), pContainerId);
+        checkContainerSize(inv, 5);
         this.data = data;
+        this.level = inv.player.level();
+        this.itemEntity = (RecipePaperItemEntity) entity;
+        xCoord = inv.player.getX();
+        yCoord = inv.player.getY();
+        zCoord = inv.player.getZ();
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 49, 44) {
+        this.itemEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 59, 33) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.is(ModTags.Items.PRINTING_PARCHMENT);
+                    return stack.getCount() == 1;
                 }
             });
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 109, 44) {
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 77, 33) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
-                    return false;
+                    return stack.getCount() == 1;
+                }
+            }); // todo : do these (x,y)'s
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 97, 33) {
+                @Override
+                public boolean mayPlace(@NotNull ItemStack stack) {
+                    return stack.getCount() == 1;
                 }
             });
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 62, 16) {
+            this.addSlot(new SlotItemHandler(iItemHandler, 3, 118, 35) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.is(ModTags.Items.STAMPS);
+                    return stack.getCount() == 1;
                 }
             });
-            this.addSlot(new SlotItemHandler(iItemHandler, 3, 96, 16) {
+            this.addSlot(new SlotItemHandler(iItemHandler, 4, 114, 76) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.is(ModTags.Items.JARS);
+                    return stack.is(Items.POTION);
                 }
             });
         });
 
         addDataSlots(data);
-    }
-
-    /**
-     * Method to check if the stamper is progressing
-     * Used to see if progress bar needs to be rendered
-     * @return true if block entity progress is greater than 0
-     */
-    public boolean isCrafting() {
-        return data.get(0) > 0;
-    }
-
-    /**
-     * Method to get the current progress in % so the rendered progress arrow is accurate
-     * @return % progress completed
-     */
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 26; // Length of arrow in pixels
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
     // The quickMoveStack function allows for shift clicking items
@@ -116,7 +93,7 @@ public class StamperMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
@@ -151,18 +128,22 @@ public class StamperMenu extends AbstractContainerMenu {
     }
 
     /**
-     * Checks for validity
-     * @param pPlayer the player
-     * @return true if stillValid call is true, false otherwise
+     * Method to check if player is still close enough to see container
+     * @param player the player
+     * @return true if close enough to container
      */
     @Override
-    public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.STAMPER.get());
+    public boolean stillValid(Player player) {
+        // Check if the player is within a certain distance from the container
+        if (player.distanceToSqr(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) > 15) {
+            return false; // Player is too far away
+        }
+
+        return true;
     }
 
     /**
-     * Method to add the players inventory to the Stamper menu
+     * Method to add the players inventory to the Printer menu
      * @param playerInventory the players inventory to be added
      */
     private void addPlayerInventory(Inventory playerInventory) {
@@ -174,7 +155,7 @@ public class StamperMenu extends AbstractContainerMenu {
     }
 
     /**
-     * Method to add the players inventory to the Stamper menu
+     * Method to add the players inventory to the Printer menu
      * @param playerInventory the players inventory to be added
      */
     private void addPlayerHotbar(Inventory playerInventory) {
@@ -182,4 +163,5 @@ public class StamperMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
+
 }

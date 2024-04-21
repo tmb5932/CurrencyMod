@@ -47,7 +47,18 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         );
 
         this.tag(ModTags.Items.BILLS).add(
-                ModItems.ONE_DOLLAR_BILL.get()
+                ModItems.ONE_DOLLAR_BILL.get(),
+                ModItems.TEN_DOLLAR_BILL.get(),
+                ModItems.TWENTY_DOLLAR_BILL.get(),
+                ModItems.FIFTY_DOLLAR_BILL.get(),
+                ModItems.HUNDRED_DOLLAR_BILL.get(),
+                ModItems.BLACK_FAKE_MONEY.get(),
+                ModItems.WHITE_FAKE_MONEY.get(),
+                ModItems.RED_FAKE_MONEY.get(),
+                ModItems.BLUE_FAKE_MONEY.get(),
+                ModItems.GREEN_FAKE_MONEY.get(),
+                ModItems.PINK_FAKE_MONEY.get(),
+                ModItems.DARK_RED_FAKE_MONEY.get()
         );
 
         this.tag(ModTags.Items.PRINTING_PARCHMENT).add(

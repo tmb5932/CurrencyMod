@@ -238,6 +238,10 @@ public class StamperBlockEntity extends BlockEntity implements MenuProvider {
         Item paper = this.itemHandler.getStackInSlot(INPUT_SLOT).getItem();
         Item stamp = this.itemHandler.getStackInSlot(STAMP_SLOT).getItem();
         Item result;
+        if (itemHandler.getStackInSlot(INK_SLOT).isEmpty() || itemHandler.getStackInSlot(STAMP_SLOT).isEmpty()
+        || itemHandler.getStackInSlot(INPUT_SLOT).isEmpty()) {
+            return new ItemStack(Items.PAPER, Items.PAPER.getMaxStackSize() + 1);
+        }
 
         if (stamp == ModItems.MONEY_STAMP.get()) {
             if (paper == ModItems.BLACK_PAPER.get()) {
@@ -255,8 +259,13 @@ public class StamperBlockEntity extends BlockEntity implements MenuProvider {
                     result = ModItems.GREEN_FAKE_MONEY.get();
             } else if (paper == ModItems.PINK_PAPER.get()) {
                 result = ModItems.PINK_FAKE_MONEY.get();
-            } else {
-                throw new IllegalStateException("!!! CurrencyMod: Cannot find output item");
+            } else if (paper == ModItems.DARK_RED_PAPER.get()) {
+            result = ModItems.DARK_RED_FAKE_MONEY.get();
+        } else {
+                System.out.println("!!! CurrencyMod: Cannot find output item for ink:"
+                        + itemHandler.getStackInSlot(INK_SLOT) + ", stamp:" + itemHandler.getStackInSlot(STAMP_SLOT)
+                        + ", input:" + itemHandler.getStackInSlot(INPUT_SLOT));
+                return new ItemStack(Items.PAPER, Items.PAPER.getMaxStackSize() + 1);
             }
         } else if (stamp == ModItems.RECIPE_STAMP.get()) {
             if (paper == ModItems.BLACK_PAPER.get()) {
@@ -271,11 +280,19 @@ public class StamperBlockEntity extends BlockEntity implements MenuProvider {
                 result = ModItems.GREEN_RECIPE_PAPER.get();
             } else if (paper == ModItems.PINK_PAPER.get()) {
                 result = ModItems.PINK_RECIPE_PAPER.get();
+            } else if (paper == ModItems.DARK_RED_PAPER.get()) {
+                result = ModItems.DARK_RED_RECIPE_PAPER.get();
             } else {
-                throw new IllegalStateException("!!! CurrencyMod: Cannot find output item");
+                System.out.println("!!! CurrencyMod: Cannot find output item for ink:"
+                        + itemHandler.getStackInSlot(INK_SLOT) + ", stamp:" + itemHandler.getStackInSlot(STAMP_SLOT)
+                        + ", input:" + itemHandler.getStackInSlot(INPUT_SLOT));
+                return new ItemStack(Items.PAPER, Items.PAPER.getMaxStackSize() + 1);
             }
         } else {
-            throw new IllegalStateException("!!! CurrencyMod: Cannot find output item");
+            System.out.println("!!! CurrencyMod: Cannot find output item for ink:"
+                    + itemHandler.getStackInSlot(INK_SLOT) + ", stamp:" + itemHandler.getStackInSlot(STAMP_SLOT)
+                    + ", input:" + itemHandler.getStackInSlot(INPUT_SLOT));
+            return new ItemStack(Items.PAPER, Items.PAPER.getMaxStackSize() + 1);
         }
         return new ItemStack(result);
     }

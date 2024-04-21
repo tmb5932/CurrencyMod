@@ -52,7 +52,7 @@ public class ModItems {
     public static final RegistryObject<Item> WHITE_FAKE_MONEY = ITEMS.register("white_fake_money",
             () -> new DollarBillItem(new Item.Properties(), 0));
 
-    public static final RegistryObject<Item> RED_FAKE_MONEY = ITEMS.register("black_fake_money",
+    public static final RegistryObject<Item> RED_FAKE_MONEY = ITEMS.register("red_fake_money",
             () -> new DollarBillItem(new Item.Properties(), 0));
 
     public static final RegistryObject<Item> BLUE_FAKE_MONEY = ITEMS.register("blue_fake_money",
@@ -62,6 +62,9 @@ public class ModItems {
             () -> new DollarBillItem(new Item.Properties(), 0));
 
     public static final RegistryObject<Item> PINK_FAKE_MONEY = ITEMS.register("pink_fake_money",
+            () -> new DollarBillItem(new Item.Properties(), 0));
+
+    public static final RegistryObject<Item> DARK_RED_FAKE_MONEY = ITEMS.register("dark_red_fake_money",
             () -> new DollarBillItem(new Item.Properties(), 0));
 
     // Ore Searching Item
@@ -146,7 +149,11 @@ public class ModItems {
     public static final RegistryObject<Item> PINK_RECIPE_PAPER = ITEMS.register("pink_recipe_paper",
             () -> new RecipePaperItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> DARK_RED_RECIPE_PAPER = ITEMS.register("dark_red_recipe_paper",
+            () -> new RecipePaperItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> WALLET = ITEMS.register("wallet",
+            () -> new WalletItem(new Item.Properties()));
     /**
      * Registers an IEventBus with the mod items
      * @param eventBus the IEventBus to be registered
