@@ -1,145 +1,104 @@
 package net.kwzii.currencymod.screen;
 
-import net.kwzii.currencymod.item.entity.RecipePaperItemEntity;
-import net.kwzii.currencymod.util.ModTags;
+import net.kwzii.currencymod.item.ModItems;
+import net.kwzii.currencymod.item.custom.RecipePaperItem;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.NotNull;
 
 public class RecipePaperMenu extends AbstractContainerMenu {
-    public final RecipePaperItemEntity itemEntity;
-    private final ContainerData data;
-    private final Level level;
-    private final double xCoord;
-    private final double yCoord;
-    private final double zCoord;
+    private final Container data;
+    private final ItemStack itemStack;
+    private final ItemStack[] items;
+    private final double[] sliderVals;
 
     public RecipePaperMenu(int id, Inventory inv, FriendlyByteBuf friendlyByteBuf) {
-        this(id, inv, inv.player.getItemInHand(InteractionHand.MAIN_HAND).getEntityRepresentation(), new SimpleContainerData(3));
+        this(id, inv);
     }
 
-    public RecipePaperMenu(int pContainerId, Inventory inv, Entity entity, ContainerData data) {
+    public RecipePaperMenu(int pContainerId, Inventory inv) {
         super(ModMenuTypes.RECIPE_PAPER_MENU.get(), pContainerId);
         checkContainerSize(inv, 5);
-        this.data = data;
-        this.level = inv.player.level();
-        this.itemEntity = (RecipePaperItemEntity) entity;
-        xCoord = inv.player.getX();
-        yCoord = inv.player.getY();
-        zCoord = inv.player.getZ();
+        this.data = new SimpleContainer(8);
+        itemStack = inv.player.getItemInHand(InteractionHand.MAIN_HAND);
+
+        items = ((RecipePaperItem) itemStack.getItem()).loadItemsFromNBT(itemStack);
+        sliderVals = ((RecipePaperItem) itemStack.getItem()).loadSlidersFromNBT(itemStack);
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.itemEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 59, 33) {
-                @Override
-                public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.getCount() == 1;
-                }
-            });
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 77, 33) {
-                @Override
-                public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.getCount() == 1;
-                }
-            }); // todo : do these (x,y)'s
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 97, 33) {
-                @Override
-                public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.getCount() == 1;
-                }
-            });
-            this.addSlot(new SlotItemHandler(iItemHandler, 3, 118, 35) {
-                @Override
-                public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.getCount() == 1;
-                }
-            });
-            this.addSlot(new SlotItemHandler(iItemHandler, 4, 114, 76) {
-                @Override
-                public boolean mayPlace(@NotNull ItemStack stack) {
-                    return stack.is(Items.POTION);
-                }
-            });
-        });
-
-        addDataSlots(data);
+        for (int i = 0; i < 4; i++) {   // Create the 4 ingredients slots
+            addSlot(new Slot(data, i, 59 + i * 19, 33)).set(items[i]); // todo: get correct x,y
+        }
+        // Create the result slot
+        addSlot(new Slot(data, 4, 114, 76)).set(items[4]); // todo: get correct x,y
     }
 
-    // The quickMoveStack function allows for shift clicking items
-    // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
-    // must assign a slot number to each of the slots used by the GUI.
-    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
-    // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
-    //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
-    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
-    //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
-    private static final int HOTBAR_SLOT_COUNT = 9;
-    private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
-    private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
-    private static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
+    private static final int HOTBAR_SLOT_COUNT = 9; // 9 slots on hot bar
+    private static final int PLAYER_INVENTORY_SLOT_COUNT = 9 * 3;   // 9 COLUMNS x 3 ROWS of base inventory
     private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
-    private static final int VANILLA_FIRST_SLOT_INDEX = 0;
-    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
+    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_SLOT_COUNT;
+    private static final int TE_SLOT_COUNT = 5; // Num of custom slots in menu
 
-    // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    /**
+     * Method to pickup/interact with item in inventory
+     * Method makes it so the wallet cannot be moved or altered while its menu is open
+     *
+     * @param pSlotId    the slot that was clicked
+     * @param pButton    the button it was pressed with
+     * @param pClickType the click type
+     * @param pPlayer    the player
+     */
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int pIndex) {
-        Slot sourceSlot = slots.get(pIndex);
-        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
-        ItemStack sourceStack = sourceSlot.getItem();
-        ItemStack copyOfSourceStack = sourceStack.copy();
+    public void clicked(int pSlotId, int pButton, ClickType pClickType, Player pPlayer) {
+        if (pSlotId > 0 && pSlotId < VANILLA_SLOT_COUNT && slots.get(pSlotId).hasItem() && slots.get(pSlotId).getItem().is(ModItems.WALLET.get())) {
+            return;
+        }
+        super.clicked(pSlotId, pButton, pClickType, pPlayer);
 
-        // Check if the slot clicked is one of the vanilla container slots
-        if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
-            // This is a vanilla container slot so merge the stack into the tile inventory
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;  // EMPTY_ITEM
-            }
-        } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
-            // This is a TE slot so merge the stack into the players inventory
-            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else {
-            System.out.println("Invalid slotIndex:" + pIndex);
-            return ItemStack.EMPTY;
-        }
-        // If stack size == 0 (the entire stack was moved) set slot contents to null
-        if (sourceStack.getCount() == 0) {
-            sourceSlot.set(ItemStack.EMPTY);
-        } else {
-            sourceSlot.setChanged();
-        }
-        sourceSlot.onTake(playerIn, sourceStack);
-        return copyOfSourceStack;
     }
 
     /**
-     * Method to check if player is still close enough to see container
-     * @param player the player
-     * @return true if close enough to container
+     * Method to allow for shift clicking an item and moving it around the inventory
+     *
+     * @param player    the player
+     * @param slotIndex the slot being moved
+     * @return the ItemStack
      */
     @Override
-    public boolean stillValid(Player player) {
-        // Check if the player is within a certain distance from the container
-        if (player.distanceToSqr(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) > 15) {
-            return false; // Player is too far away
-        }
+    public ItemStack quickMoveStack(Player player, int slotIndex) {
+        ItemStack itemstack;
+        Slot slot = this.slots.get(slotIndex);
 
-        return true;
+        if (slot == null || !slot.hasItem()) return ItemStack.EMPTY;
+        ItemStack slotStack = slot.getItem();
+        itemstack = slotStack.copy();
+
+        if (slotIndex < TE_INVENTORY_FIRST_SLOT_INDEX) {
+            // Transfer from player inventory to custom slots
+            if (!this.moveItemStackTo(slotStack, TE_INVENTORY_FIRST_SLOT_INDEX, this.slots.size(), false)) {
+                return ItemStack.EMPTY;
+            }
+        } else {
+            // Transfer from custom slots to player inventory
+            if (!this.moveItemStackTo(slotStack, 0, VANILLA_SLOT_COUNT, true)) {
+                return ItemStack.EMPTY;
+            }
+        }
+        // If stack size == 0 (the entire stack was moved) set slot contents to null
+        if (slotStack.getCount() == 0) {
+            slot.set(ItemStack.EMPTY);
+        } else {
+            slot.setChanged();
+        }
+        slot.onTake(player, slotStack);
+        return itemstack;
     }
 
     /**
@@ -164,4 +123,43 @@ public class RecipePaperMenu extends AbstractContainerMenu {
         }
     }
 
+    /**
+     * Checks for validity of whether the menu is still valid to keep open
+     * Doesn't really have a good way of checking when it's an item.
+     * For blocks, it's a distance thing, but for items they are always going be in your hand
+     * @param pPlayer the player
+     * @return true
+     */
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return true;
+    }
+
+    /**
+     * Method to determine what should be done when menu is closed
+     * Saves the items that are in the recipe paper
+     * @param pPlayer the player
+     */
+    @Override
+    public void removed(Player pPlayer) {
+        for (int i = 0; i < TE_SLOT_COUNT; i++) {
+            items[i] = slots.get(TE_INVENTORY_FIRST_SLOT_INDEX+i).getItem();
+        }
+
+        super.removed(pPlayer);
+        ((RecipePaperItem) itemStack.getItem()).saveItemsToNBT(itemStack, items);
+        saveSliderData(sliderVals);
+    }
+
+    public double getSliderData(int i) {
+        return sliderVals[i];
+    }
+
+    public void setSliderData(int i, double val) {
+        sliderVals[i] = val;
+    }
+
+    public void saveSliderData(double[] i) {
+        ((RecipePaperItem) itemStack.getItem()).saveSlidersToNBT(itemStack, i);
+    }
 }

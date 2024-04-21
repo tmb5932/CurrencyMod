@@ -5,7 +5,6 @@ import net.kwzii.currencymod.block.ModBlocks;
 import net.kwzii.currencymod.block.entity.ModBlockEntities;
 import net.kwzii.currencymod.item.ModCreativeModTabs;
 import net.kwzii.currencymod.item.ModItems;
-import net.kwzii.currencymod.item.entity.ModItemEntities;
 import net.kwzii.currencymod.screen.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -45,7 +44,6 @@ public class CurrencyMod {
         ModBlocks.register(modEventBus);
 
         ModBlockEntities.register(modEventBus);
-        ModItemEntities.register(modEventBus);
 
         ModMenuTypes.register(modEventBus);
 
@@ -100,7 +98,7 @@ public class CurrencyMod {
             MenuScreens.register(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), BasicMoneyPrinterScreen::new);
             MenuScreens.register(ModMenuTypes.INK_JUICER_MENU.get(), InkJuicerScreen::new);
             MenuScreens.register(ModMenuTypes.STAMPER_MENU.get(), StamperScreen::new);
-            //MenuScreens.register(ModMenuTypes.RECIPE_PAPER_MENU.get(), RecipePaperScreen::new);
+            MenuScreens.register(ModMenuTypes.RECIPE_PAPER_MENU.get(), RecipePaperScreen::new);
             MenuScreens.register(ModMenuTypes.WALLET_MENU.get(), WalletScreen::new);
 
             // Sets render of object to translucent so opaque things will be seen through

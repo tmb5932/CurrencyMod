@@ -9,14 +9,26 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+/**
+ * Screen rendering class for the Wallet Menu
+ */
 public class WalletScreen extends AbstractContainerScreen<WalletMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(CurrencyMod.MOD_ID, "textures/gui/wallet_gui.png");
 
+    /**
+     * Constructor for the Wallet screen
+     * @param pMenu the menu to be shown
+     * @param inv the player inventory
+     * @param title the title of the screen
+     */
     public WalletScreen(WalletMenu pMenu, Inventory inv, Component title) {
         super(pMenu, inv, title);
     }
 
+    /**
+     * Method to initialize the screen
+     */
     @Override
     protected void init() {
         super.init();
@@ -24,6 +36,13 @@ public class WalletScreen extends AbstractContainerScreen<WalletMenu> {
         this.inventoryLabelY = 10000;
     }
 
+    /**
+     * Method to render the graphics
+     * @param guiGraphics the gui graphics
+     * @param pPartialTick float value partial tick
+     * @param pMouseX int the mouse x value
+     * @param pMouseY int the mouse y value
+     */
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);

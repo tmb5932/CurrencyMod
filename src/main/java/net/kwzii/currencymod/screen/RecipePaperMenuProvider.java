@@ -8,23 +8,23 @@ import net.minecraft.world.MenuProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Menu Provider Class for the Wallet GUI
+ * Menu Provider Class for the Recipe Paper GUI
  * @author Travis Brown
  */
-public class WalletMenuProvider implements MenuProvider {
+public class RecipePaperMenuProvider implements MenuProvider {
 
     /**
-     * Empty constructor for the Wallet Menu Provider
+     * Empty constructor for the Recipe Paper Menu Provider
      */
-    public WalletMenuProvider() {}
+    public RecipePaperMenuProvider() {}
 
     /**
-     * Method to set the displayed name of the wallet
+     * Method to set the displayed name of the recipe paper
      * @return Component that is shown on GUI
      */
     @Override
     public Component getDisplayName() {
-        return Component.literal("Wallet");
+        return Component.literal("Recipe Paper");
     }
 
     /**
@@ -37,6 +37,6 @@ public class WalletMenuProvider implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory inv, Player pPlayer) {
-        return new WalletMenu(pContainerId, inv);
+        return new RecipePaperMenu(pContainerId, inv);
     }
 }

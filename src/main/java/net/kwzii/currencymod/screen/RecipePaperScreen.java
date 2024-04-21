@@ -10,6 +10,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+import java.util.Arrays;
+
 
 /**
  * Screen rendering class for the Stamper Menu
@@ -21,9 +23,18 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
     private AbstractSliderButton aeratSlider;
     private AbstractSliderButton purifSlider;
 
-    private int heatVal = 0;    // Current heat slider value
-    private int aeratVal = 0;   // Current aeration slider value
-    private int purifVal = 0;   // Current purification slider value
+    private double heatVal = 0;    // Current heat slider value
+    private double aeratVal = 0;   // Current aeration slider value
+    private double purifVal = 0;   // Current purification slider value
+    private final int sliderX = 44; // Sliders X value's (all 3)
+    private final int heatSliderY = 48;     // Slider Y location
+
+    private final int aeratSliderY = 90;    // Slider Y location
+
+    private final int purifSliderY = 140;    // Slider Y location
+
+    private final int sliderWidth = 100; // Slider Width
+    private final int sliderHeight = 15; // Slider Height
 
     /**
      * Constructor for the stamper screen
@@ -40,16 +51,6 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
      */
     @Override
     protected void init() {
-        int sliderX = 44; // Sliders X value's (all 3)
-        int heatSliderY = 48;     // Slider Y location
-
-        int aeratSliderY = 60;    // Slider Y location
-
-        int purifSliderY = 72;    // Slider Y location
-
-        int sliderWidth = 46; // Slider Width
-        int sliderHeight = 7; // Slider Height
-
         int handleWidth = 4;      // Handle Width
         int handleHeight = 11;    // Handle Height
 
@@ -57,9 +58,14 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
         int maxValue = 50;    // Maximum value of the sliders
 
         super.init();
-//        this.inventoryLabelY = 10000;
+        this.inventoryLabelY = 10000;
 //        this.titleLabelY = 10000;
-        this.heatSlider = new AbstractSliderButton(sliderX, heatSliderY, sliderWidth, sliderHeight, Component.literal("Heat"), 0) {
+        heatVal = menu.getSliderData(0);
+        System.out.println("HEAT:" + menu.getSliderData(0));
+        aeratVal = menu.getSliderData(1);
+        purifVal = menu.getSliderData(2);
+
+        this.heatSlider = new AbstractSliderButton(sliderX, heatSliderY, sliderWidth, sliderHeight, Component.literal("Heat"), heatVal) {
             @Override
             protected void updateMessage() {
 
@@ -67,10 +73,17 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
 
             @Override
             protected void applyValue() {
-//                menu.setData(,);
+
+            }
+
+            @Override
+            public void onClick(double pMouseX, double pMouseY) {
+                super.onClick(pMouseX, pMouseY);
+                heatVal = (pMouseX - sliderX) / sliderWidth;
+                System.out.println("HEATCLICK:" + pMouseX + "; =>" + heatVal);
             }
         };
-        this.aeratSlider = new AbstractSliderButton(sliderX, aeratSliderY, sliderWidth, sliderHeight, Component.literal("Aeration"), 0) {
+        this.aeratSlider = new AbstractSliderButton(sliderX, aeratSliderY, sliderWidth, sliderHeight, Component.literal("Aeration"), aeratVal) {
             @Override
             protected void updateMessage() {
 
@@ -79,9 +92,16 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
             @Override
             protected void applyValue() {
 //                menu.setData(,);
+            }
+
+            @Override
+            public void onClick(double pMouseX, double pMouseY) {
+                super.onClick(pMouseX, pMouseY);
+                aeratVal = (pMouseX - sliderX) / sliderWidth;
+                System.out.println("AERATVAL:" + pMouseX + "; =>" + aeratVal);
             }
         };
-        this.purifSlider = new AbstractSliderButton(sliderX, purifSliderY, sliderWidth, sliderHeight, Component.literal("Purification"), 0) {
+        this.purifSlider = new AbstractSliderButton(sliderX, purifSliderY, sliderWidth, sliderHeight, Component.literal("Purification"), purifVal) {
             @Override
             protected void updateMessage() {
 
@@ -90,6 +110,13 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
             @Override
             protected void applyValue() {
 //                menu.setData(,);
+            }
+
+            @Override
+            public void onClick(double pMouseX, double pMouseY) {
+                super.onClick(pMouseX, pMouseY);
+                purifVal = (pMouseX - sliderX) / sliderWidth;
+                System.out.println("PURIFCLICK:" + pMouseX + "; =>" + purifVal);
             }
         };
         this.addRenderableWidget(heatSlider);
@@ -115,34 +142,6 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
     }
 
-//    @Override
-//    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-//        if (isMouseOverHeatSlider(pMouseX, pMouseY)) {
-//            heatVal = calcValue(pMouseX);
-//        } else if (isMouseOverAeratSlider(pMouseX, pMouseY)) {
-//            aeratVal = calcValue(pMouseX);
-//        } else if (isMouseOverPurifSlider(pMouseX, pMouseY)) {
-//            purifVal = calcValue(pMouseX);
-//        }
-//        return super.mouseClicked(pMouseX, pMouseY, pButton);
-//    }
-//
-//    private int calcValue(double x) {
-//        return (int) ((x - sliderX) / sliderWidth) * 100;
-//    }
-//
-//    private boolean isMouseOverAeratSlider(double x, double y) {
-//        return (sliderX <= x && sliderX + width >= x) && (aeratSliderY <= y && aeratSliderY + height >= y);
-//    }
-//
-//    private boolean isMouseOverHeatSlider(double x, double y) {
-//        return (sliderX <= x && sliderX + width >= x) && (heatSliderY <= y && heatSliderY + height >= y);
-//    }
-//
-//    private boolean isMouseOverPurifSlider(double x, double y) {
-//        return (sliderX <= x && sliderX + width >= x) && (purifSliderY <= y && purifSliderY + height >= y);
-//    }
-
     /**
      * Method to render the graphics
      * @param guiGraphics the graphics to render
@@ -153,17 +152,30 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         renderBackground(guiGraphics);
-
-//        int heatSliderX = heatSliderX + (int) ((float) (currentValue - minValue) / (maxValue - minValue) * (sliderWidth - handleWidth));
-//        int heatHandleY = sliderY - handleHeight / 2;
-//
-//        int handleX = sliderX + (int) ((float) (currentValue - minValue) / (maxValue - minValue) * (sliderWidth - handleWidth));
-//        int handleY = sliderY - handleHeight / 2;
-//
-//        int handleX = sliderX + (int) ((float) (currentValue - minValue) / (maxValue - minValue) * (sliderWidth - handleWidth));
-//        int handleY = sliderY - handleHeight / 2;
-
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
+    @Override
+    public void onClose() {
+        System.out.println("CLOSING :" + heatVal);
+//        double[] sliders = new double[3];
+//        sliders[0] = heatVal;
+//        sliders[1] = aeratVal;
+//        sliders[2] = purifVal;
+//        menu.saveSliderData(sliders);
+        super.onClose();
+    }
+
+    @Override
+    public void removed() {
+        System.out.println("REMOVED");
+        double[] sliders = new double[3];
+        sliders[0] = heatVal;
+        sliders[1] = aeratVal;
+        sliders[2] = purifVal;
+        System.out.println("SLIDERS:" + Arrays.toString(sliders));
+        menu.saveSliderData(sliders);
+        super.removed();
     }
 }

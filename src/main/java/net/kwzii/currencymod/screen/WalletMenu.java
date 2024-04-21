@@ -5,12 +5,13 @@ import net.kwzii.currencymod.item.custom.WalletItem;
 import net.kwzii.currencymod.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 
@@ -19,9 +20,8 @@ import java.util.Arrays;
  * @author Travis Brown
  */
 public class WalletMenu extends AbstractContainerMenu {
-    Level level;
-    Container data;
-    private ItemStack itemStack = null;
+    private final Container data;
+    private final ItemStack itemStack;
     private final ItemStack[] items;
 
     /**
@@ -44,53 +44,25 @@ public class WalletMenu extends AbstractContainerMenu {
     public WalletMenu(int pContainerId, Inventory inv) {
         super(ModMenuTypes.WALLET_MENU.get(), pContainerId);
         checkContainerSize(inv, 5);
-        this.level = inv.player.level();
-        this.data = new SimpleContainer(6);
+        this.data = new SimpleContainer(5); // todo check this works
+        int CUSTOM_SLOTS = 5;
 
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-            ItemStack stack = inv.getItem(i);
-            if (stack.getItem() == ModItems.WALLET.get()) {
-                itemStack = stack;
-                break;
-            }
-        }
+        itemStack = inv.player.getItemInHand(InteractionHand.MAIN_HAND);
 
         items = ((WalletItem) itemStack.getItem()).loadItemsFromNBT(itemStack);
-        System.out.println(Arrays.toString(items));
+        System.out.println(Arrays.toString(items)); // todo remove
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        addSlot(new Slot(data, 0, 36 + 0 * 22, 52) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.BILLS);
-            }
-        }).set(items[0]);
-        addSlot(new Slot(data, 1, 36 + 1 * 22, 52) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.BILLS);
-            }
-        }).set(items[1]);
-        addSlot(new Slot(data, 2, 36 + 2 * 22, 52) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.BILLS);
-            }
-        }).set(items[2]);
-        addSlot(new Slot(data, 3, 36 + 3 * 22, 52) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.BILLS);
-            }
-        }).set(items[3]);
-        addSlot(new Slot(data, 4, 36 + 4 * 22, 52) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ModTags.Items.BILLS);
-            }
-        }).set(items[4]);
+        for (int i = 0; i < CUSTOM_SLOTS; i++) {
+            addSlot(new Slot(data, i, 36 + i * 22, 52) {
+                @Override
+                public boolean mayPlace(ItemStack stack) {
+                    return stack.is(ModTags.Items.BILLS);
+                }
+            }).set(items[i]);
+        }
     }
 
     private static final int HOTBAR_SLOT_COUNT = 9; // 9 slots on hot bar
@@ -181,7 +153,7 @@ public class WalletMenu extends AbstractContainerMenu {
      * Doesn't really have a good way of checking when it's an item.
      * For blocks, it's a distance thing, but for items they are always going be in your hand
      * @param pPlayer the player
-     * @return true if stillValid call is true, false otherwise
+     * @return true
      */
     @Override
     public boolean stillValid(Player pPlayer) {
@@ -196,7 +168,7 @@ public class WalletMenu extends AbstractContainerMenu {
     @Override
     public void removed(Player pPlayer) {
         // Saves the items in the wallet
-        for (int i = 0; i < TE_SLOT_COUNT; ++i) {
+        for (int i = 0; i < TE_SLOT_COUNT; i++) {
             items[i] = slots.get(TE_INVENTORY_FIRST_SLOT_INDEX+i).getItem();
         }
         super.removed(pPlayer);
