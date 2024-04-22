@@ -129,27 +129,9 @@ public class ModItems {
     public static final RegistryObject<Item> MONEY_STAMP = ITEMS.register("money_stamp",
             () -> new Item(new Item.Properties().stacksTo(1)));
 
-    // Recipe Paper Items
-    // todo make models for these V
-    public static final RegistryObject<Item> BLACK_RECIPE_PAPER = ITEMS.register("black_recipe_paper",
-            () -> new RecipePaperItem(new Item.Properties()));
-
+    // Recipe Paper Item
+    // todo make proper model for this V
     public static final RegistryObject<Item> WHITE_RECIPE_PAPER = ITEMS.register("white_recipe_paper",
-            () -> new RecipePaperItem(new Item.Properties()));
-
-    public static final RegistryObject<Item> RED_RECIPE_PAPER = ITEMS.register("red_recipe_paper",
-            () -> new RecipePaperItem(new Item.Properties()));
-
-    public static final RegistryObject<Item> BLUE_RECIPE_PAPER = ITEMS.register("blue_recipe_paper",
-            () -> new RecipePaperItem(new Item.Properties()));
-
-    public static final RegistryObject<Item> GREEN_RECIPE_PAPER = ITEMS.register("green_recipe_paper",
-            () -> new RecipePaperItem(new Item.Properties()));
-
-    public static final RegistryObject<Item> PINK_RECIPE_PAPER = ITEMS.register("pink_recipe_paper",
-            () -> new RecipePaperItem(new Item.Properties()));
-
-    public static final RegistryObject<Item> DARK_RED_RECIPE_PAPER = ITEMS.register("dark_red_recipe_paper",
             () -> new RecipePaperItem(new Item.Properties()));
 
     public static final RegistryObject<Item> WALLET = ITEMS.register("wallet",

@@ -72,13 +72,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PINK_FAKE_MONEY);
         simpleItem(ModItems.DARK_RED_FAKE_MONEY);
 
-        simpleItem(ModItems.BLACK_RECIPE_PAPER);
         simpleItem(ModItems.WHITE_RECIPE_PAPER);
-        simpleItem(ModItems.RED_RECIPE_PAPER);
-        simpleItem(ModItems.BLUE_RECIPE_PAPER);
-        simpleItem(ModItems.GREEN_RECIPE_PAPER);
-        simpleItem(ModItems.PINK_RECIPE_PAPER);
-        simpleItem(ModItems.DARK_RED_RECIPE_PAPER);
 
         simpleItem(ModItems.WALLET);
         // Creates Item models for blocks that have a non data gen block state and model

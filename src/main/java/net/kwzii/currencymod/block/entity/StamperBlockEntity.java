@@ -268,26 +268,7 @@ public class StamperBlockEntity extends BlockEntity implements MenuProvider {
                 return new ItemStack(Items.PAPER, Items.PAPER.getMaxStackSize() + 1);
             }
         } else if (stamp == ModItems.RECIPE_STAMP.get()) {
-            if (paper == ModItems.BLACK_PAPER.get()) {
-                result = ModItems.BLACK_RECIPE_PAPER.get();
-            } else if (paper == Items.PAPER) {
-                result = ModItems.WHITE_RECIPE_PAPER.get();
-            } else if (paper == ModItems.RED_PAPER.get()) {
-                result = ModItems.RED_RECIPE_PAPER.get();
-            } else if (paper == ModItems.BLUE_PAPER.get()) {
-                result = ModItems.BLUE_RECIPE_PAPER.get();
-            } else if (paper == ModItems.GREEN_PAPER.get()) {
-                result = ModItems.GREEN_RECIPE_PAPER.get();
-            } else if (paper == ModItems.PINK_PAPER.get()) {
-                result = ModItems.PINK_RECIPE_PAPER.get();
-            } else if (paper == ModItems.DARK_RED_PAPER.get()) {
-                result = ModItems.DARK_RED_RECIPE_PAPER.get();
-            } else {
-                System.out.println("!!! CurrencyMod: Cannot find output item for ink:"
-                        + itemHandler.getStackInSlot(INK_SLOT) + ", stamp:" + itemHandler.getStackInSlot(STAMP_SLOT)
-                        + ", input:" + itemHandler.getStackInSlot(INPUT_SLOT));
-                return new ItemStack(Items.PAPER, Items.PAPER.getMaxStackSize() + 1);
-            }
+            result = ModItems.WHITE_RECIPE_PAPER.get();
         } else {
             System.out.println("!!! CurrencyMod: Cannot find output item for ink:"
                     + itemHandler.getStackInSlot(INK_SLOT) + ", stamp:" + itemHandler.getStackInSlot(STAMP_SLOT)
