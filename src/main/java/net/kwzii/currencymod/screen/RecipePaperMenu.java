@@ -1,6 +1,5 @@
 package net.kwzii.currencymod.screen;
 
-import net.kwzii.currencymod.item.ModItems;
 import net.kwzii.currencymod.item.custom.RecipePaperItem;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -10,12 +9,15 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+
+import java.util.Arrays;
 
 public class RecipePaperMenu extends AbstractContainerMenu {
     private final Container data;
     private final ItemStack itemStack;
     private final ItemStack[] items;
-    private final double[] sliderVals;
+    private final double[] sliderVals = new double[3];
 
     public RecipePaperMenu(int id, Inventory inv, FriendlyByteBuf friendlyByteBuf) {
         this(id, inv);
@@ -27,8 +29,22 @@ public class RecipePaperMenu extends AbstractContainerMenu {
         this.data = new SimpleContainer(8);
         itemStack = inv.player.getItemInHand(InteractionHand.MAIN_HAND);
 
-        items = ((RecipePaperItem) itemStack.getItem()).loadItemsFromNBT(itemStack);
-        sliderVals = ((RecipePaperItem) itemStack.getItem()).loadSlidersFromNBT(itemStack);
+        items = new ItemStack[8];
+
+        ItemStack[] stacks = ((RecipePaperItem) itemStack.getItem()).loadItemsFromNBT(itemStack);
+
+        for (int i = 0; i < 5; i++) {
+            if (stacks[i] != null)
+                items[i] = stacks[i].copy();
+            else
+                items[i] = new ItemStack(Items.AIR, 0);
+        }
+        for (int i = 5; i < 8; i++) {
+            if (stacks[i] != null && stacks[i] != ItemStack.EMPTY)
+                sliderVals[i-5] = (double) stacks[i].getCount() / 100;
+            else
+                sliderVals[i-5] = 0;    // ALWAYS GOES HERE !!!!
+        }
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -57,7 +73,7 @@ public class RecipePaperMenu extends AbstractContainerMenu {
      */
     @Override
     public void clicked(int pSlotId, int pButton, ClickType pClickType, Player pPlayer) {
-        if (pSlotId > 0 && pSlotId < VANILLA_SLOT_COUNT && slots.get(pSlotId).hasItem() && slots.get(pSlotId).getItem().is(ModItems.WALLET.get())) {
+        if (pSlotId > 0 && pSlotId < VANILLA_SLOT_COUNT && slots.get(pSlotId).hasItem() && slots.get(pSlotId).getItem() == pPlayer.getItemInHand(InteractionHand.MAIN_HAND)) {
             return;
         }
         super.clicked(pSlotId, pButton, pClickType, pPlayer);
@@ -75,7 +91,7 @@ public class RecipePaperMenu extends AbstractContainerMenu {
     public ItemStack quickMoveStack(Player player, int slotIndex) {
         ItemStack itemstack;
         Slot slot = this.slots.get(slotIndex);
-
+        System.out.println("THIS IS THE VALUE :" + sliderVals[0]);
         if (slot == null || !slot.hasItem()) return ItemStack.EMPTY;
         ItemStack slotStack = slot.getItem();
         itemstack = slotStack.copy();
@@ -142,13 +158,20 @@ public class RecipePaperMenu extends AbstractContainerMenu {
      */
     @Override
     public void removed(Player pPlayer) {
+        super.removed(pPlayer);
+
         for (int i = 0; i < TE_SLOT_COUNT; i++) {
             items[i] = slots.get(TE_INVENTORY_FIRST_SLOT_INDEX+i).getItem();
         }
-
-        super.removed(pPlayer);
-        ((RecipePaperItem) itemStack.getItem()).saveItemsToNBT(itemStack, items);
-        saveSliderData(sliderVals);
+        items[4] = new ItemStack(Items.CACTUS, 99);
+        items[5] = new ItemStack(Items.COAL, (int) (sliderVals[0] * 100));
+        System.out.println("SLIDER 0 :" + sliderVals[0] + ", SLIDER 1 :" + sliderVals[1] + ", SLIDER 2 :" + sliderVals[2]);
+        items[6] = new ItemStack(Items.BEEF, (int) (sliderVals[1] * 100));
+        items[7] = new ItemStack(Items.PUFFERFISH, (int) (sliderVals[2] * 100));
+        System.out.println(Arrays.toString(items));
+        System.out.println("######### BEFORE SAVING" + Arrays.toString(sliderVals));
+//        if (sliderVals[0] != 0 && sliderVals[1] != 0 && sliderVals[2] != 0)
+            ((RecipePaperItem) itemStack.getItem()).saveItemsToNBT(itemStack, items);
     }
 
     public double getSliderData(int i) {
@@ -157,9 +180,6 @@ public class RecipePaperMenu extends AbstractContainerMenu {
 
     public void setSliderData(int i, double val) {
         sliderVals[i] = val;
-    }
-
-    public void saveSliderData(double[] i) {
-        ((RecipePaperItem) itemStack.getItem()).saveSlidersToNBT(itemStack, i);
+        System.out.println("ID:" + i + ", and VAL:" + val);
     }
 }

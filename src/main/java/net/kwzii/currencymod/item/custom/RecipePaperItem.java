@@ -41,7 +41,7 @@ public class RecipePaperItem extends Item {
             pPlayer.openMenu(new RecipePaperMenuProvider());
             return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
         } else
-            return super.use(pLevel, pPlayer, pUsedHand);
+            return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
     }
 
     /**
@@ -52,73 +52,80 @@ public class RecipePaperItem extends Item {
     public void saveItemsToNBT(ItemStack stack, ItemStack[] items) {
         CompoundTag tag = stack.getOrCreateTag();
         CompoundTag itemsTag = new CompoundTag();
+
         for (int i = 0; i < items.length; i++) {
+            System.out.println("COUNT IS AT -> " + i);
             if (!items[i].isEmpty()) {
+                System.out.println(items[i]);
                 CompoundTag itemTag = new CompoundTag();
                 items[i].save(itemTag);
                 itemsTag.put(String.valueOf(i), itemTag);
             }
         }
+
         tag.put(INV_TAG, itemsTag);
         stack.setTag(tag);
+        System.out.println("SECONDARY FULL TAG SAVED:" + stack.getTag());
     }
 
     /**
      * Method to deserialize the NBT data and retrieve the items when the menu is opened
-     * @param stack the wallet instance
+     * @param stack the recipe paper instance
      * @return the ItemStack array of items stored
      */
     public ItemStack[] loadItemsFromNBT(ItemStack stack) {
         CompoundTag tag = stack.getTag();
+        System.out.println((tag == null) + "TRUTH FACTOR 1?");
+        if (tag != null)
+            System.out.println((tag.contains(INV_TAG)) + "TRUTH FACTOR 2?");
+
+
         if (tag != null && tag.contains(INV_TAG)) {
             CompoundTag itemsTag = tag.getCompound(INV_TAG);
-            ItemStack[] items = new ItemStack[INV_SIZE];
+            ItemStack[] items = new ItemStack[INV_SIZE+3];
             for (int i = 0; i < items.length; i++) {
+                System.out.println("LOAD COUNT IS AT -> " + i);
                 if (itemsTag.contains(String.valueOf(i))) {
                     CompoundTag itemTag = itemsTag.getCompound(String.valueOf(i));
                     items[i] = ItemStack.of(itemTag);
+                    System.out.println(items[i]);
                 } else {
                     items[i] = ItemStack.EMPTY;
                 }
             }
+            System.out.println(Arrays.toString(items));
             return items;
         }
-
-        ItemStack[] result = new ItemStack[INV_SIZE];
+        System.out.println("LOADED ITEMS");
+        ItemStack[] result = new ItemStack[INV_SIZE+3];
         Arrays.fill(result, ItemStack.EMPTY);
         return result;
     }
 
-    public void saveSlidersToNBT(ItemStack stack, double[] values) {
-        CompoundTag tag = stack.getOrCreateTag();
-        CompoundTag sliderTag = new CompoundTag();
-        System.out.println("NBT:" + Arrays.toString(values));
-        for (int i = 0; i < values.length; i++) {
-            sliderTag.putDouble(String.valueOf(i), values[i]);
-        }
-        tag.put(SLIDERS_TAG, sliderTag);
-        System.out.println(tag);
-        stack.setTag(tag);
-    }
-
     public double[] loadSlidersFromNBT(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        if (tag != null && tag.contains(SLIDERS_TAG)) {
-            CompoundTag sliderTag = tag.getCompound(SLIDERS_TAG);
-            double[] values = new double[3];
-            for (int i = 0; i < values.length; i++) {
-                if (sliderTag.contains(String.valueOf(i))) {
-                    CompoundTag itemTag = sliderTag.getCompound(String.valueOf(i));
-                    values[i] = itemTag.getDouble(String.valueOf(i));
-                } else {
-                    values[i] = 0;
-                }
-            }
-            return values;
-        }
+        if (!stack.isEmpty()) {
+            CompoundTag tag = stack.getTag();
+            double[] result = new double[3];
+            System.out.println("THE TAG ON START :" + tag);
 
+            if (tag != null && tag.contains(SLIDERS_TAG)) {
+                CompoundTag slidersTag = tag.getCompound(SLIDERS_TAG);
+                if (slidersTag.contains("HeatVal")) {
+                    result[0] = slidersTag.getDouble("HeatVal");
+                }
+                if (slidersTag.contains("AeroVal"))
+                    result[1] = slidersTag.getDouble("AeroVal");
+                if (slidersTag.contains("PurifVal"))
+                    result[2] = slidersTag.getDouble("PurifVal");
+            } else {
+                System.out.println("No Recipe Paper Tag available");
+            }
+            System.out.println("THE SLIDER VALUES ARE OFFICIALLY " + Arrays.toString(result));
+            return result;
+        }
+        System.out.println("FAILED LOADING SLIDERS");
         double[] result = new double[3];
-        Arrays.fill(result, 0.0);
+        Arrays.fill(result, 0.0D);
         return result;
     }
 }

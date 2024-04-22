@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -51,72 +52,122 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
      */
     @Override
     protected void init() {
-        int handleWidth = 4;      // Handle Width
-        int handleHeight = 11;    // Handle Height
-
-        int minValue = 0;     // Minimum value of the sliders
-        int maxValue = 50;    // Maximum value of the sliders
-
         super.init();
         this.inventoryLabelY = 10000;
-//        this.titleLabelY = 10000;
+
         heatVal = menu.getSliderData(0);
-        System.out.println("HEAT:" + menu.getSliderData(0));
         aeratVal = menu.getSliderData(1);
         purifVal = menu.getSliderData(2);
 
         this.heatSlider = new AbstractSliderButton(sliderX, heatSliderY, sliderWidth, sliderHeight, Component.literal("Heat"), heatVal) {
             @Override
-            protected void updateMessage() {
-
-            }
+            protected void updateMessage() {}
 
             @Override
-            protected void applyValue() {
-
-            }
+            protected void applyValue() {}
 
             @Override
             public void onClick(double pMouseX, double pMouseY) {
                 super.onClick(pMouseX, pMouseY);
                 heatVal = (pMouseX - sliderX) / sliderWidth;
                 System.out.println("HEATCLICK:" + pMouseX + "; =>" + heatVal);
+                menu.setSliderData(0, heatVal);
+            }
+
+            @Override
+            public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+                boolean result = super.keyPressed(pKeyCode, pScanCode, pModifiers);
+                if (result) {
+                    if (pKeyCode == 262) {
+                        if (heatVal != 1) {
+                            heatVal += 1.0 / (float) (this.width - 8);
+                        }
+                    } else if (pKeyCode == 263) {
+                        if (heatVal != 0) {
+                            heatVal -= 1.0 / (float) (this.width - 8);
+                        }
+                    }
+                    if (heatVal < 0) {
+                        heatVal = 0;
+                    } else if (heatVal > 1) {
+                        heatVal = 1;
+                    }
+                }
+                return result;
             }
         };
         this.aeratSlider = new AbstractSliderButton(sliderX, aeratSliderY, sliderWidth, sliderHeight, Component.literal("Aeration"), aeratVal) {
             @Override
-            protected void updateMessage() {
-
-            }
+            protected void updateMessage() {}
 
             @Override
-            protected void applyValue() {
-//                menu.setData(,);
-            }
+            protected void applyValue() {}
 
             @Override
             public void onClick(double pMouseX, double pMouseY) {
                 super.onClick(pMouseX, pMouseY);
                 aeratVal = (pMouseX - sliderX) / sliderWidth;
                 System.out.println("AERATVAL:" + pMouseX + "; =>" + aeratVal);
+                menu.setSliderData(1, aeratVal);
+            }
+
+            @Override
+            public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+                boolean result = super.keyPressed(pKeyCode, pScanCode, pModifiers);
+                if (result) {
+                    if (pKeyCode == 262) {
+                        if (aeratVal != 1) {
+                            aeratVal += 1.0 / (float) (this.width - 8);
+                        }
+                    } else if (pKeyCode == 263) {
+                        if (aeratVal != 0) {
+                            aeratVal -= 1.0 / (float) (this.width - 8);
+                        }
+                    }
+                    if (aeratVal < 0) {
+                        aeratVal = 0;
+                    } else if (aeratVal > 1) {
+                        aeratVal = 1;
+                    }
+                }
+                return result;
             }
         };
         this.purifSlider = new AbstractSliderButton(sliderX, purifSliderY, sliderWidth, sliderHeight, Component.literal("Purification"), purifVal) {
             @Override
-            protected void updateMessage() {
-
-            }
+            protected void updateMessage() {}
 
             @Override
-            protected void applyValue() {
-//                menu.setData(,);
-            }
+            protected void applyValue() {}
 
             @Override
             public void onClick(double pMouseX, double pMouseY) {
                 super.onClick(pMouseX, pMouseY);
                 purifVal = (pMouseX - sliderX) / sliderWidth;
-                System.out.println("PURIFCLICK:" + pMouseX + "; =>" + purifVal);
+                System.out.println("PERSIVAL :" + pMouseX + "; =>" + purifVal);
+                menu.setSliderData(2, purifVal);
+            }
+
+            @Override
+            public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+                boolean result = super.keyPressed(pKeyCode, pScanCode, pModifiers);
+                if (result) {
+                    if (pKeyCode == 262) {
+                        if (purifVal != 1) {
+                            purifVal += 1.0 / (float) (this.width - 8);
+                        }
+                    } else if (pKeyCode == 263) {
+                        if (purifVal != 0) {
+                            purifVal -= 1.0 / (float) (this.width - 8);
+                        }
+                    }
+                    if (purifVal < 0) {
+                        purifVal = 0;
+                    } else if (purifVal > 1) {
+                        purifVal = 1;
+                    }
+                }
+                return result;
             }
         };
         this.addRenderableWidget(heatSlider);
@@ -156,26 +207,4 @@ public class RecipePaperScreen extends AbstractContainerScreen<RecipePaperMenu> 
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
-    @Override
-    public void onClose() {
-        System.out.println("CLOSING :" + heatVal);
-//        double[] sliders = new double[3];
-//        sliders[0] = heatVal;
-//        sliders[1] = aeratVal;
-//        sliders[2] = purifVal;
-//        menu.saveSliderData(sliders);
-        super.onClose();
-    }
-
-    @Override
-    public void removed() {
-        System.out.println("REMOVED");
-        double[] sliders = new double[3];
-        sliders[0] = heatVal;
-        sliders[1] = aeratVal;
-        sliders[2] = purifVal;
-        System.out.println("SLIDERS:" + Arrays.toString(sliders));
-        menu.saveSliderData(sliders);
-        super.removed();
-    }
 }
