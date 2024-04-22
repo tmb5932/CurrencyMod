@@ -50,7 +50,6 @@ public class WalletMenu extends AbstractContainerMenu {
         itemStack = inv.player.getItemInHand(InteractionHand.MAIN_HAND);
 
         items = ((WalletItem) itemStack.getItem()).loadItemsFromNBT(itemStack);
-        System.out.println(Arrays.toString(items)); // todo remove
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
