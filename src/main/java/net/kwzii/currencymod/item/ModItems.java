@@ -124,6 +124,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(64)));
 
     // Stamp Items
+    // todo make proper models for these V
     public static final RegistryObject<Item> RECIPE_STAMP = ITEMS.register("recipe_stamp",
             () -> new Item(new Item.Properties().stacksTo(1)));
 
@@ -134,6 +135,8 @@ public class ModItems {
     public static final RegistryObject<Item> WALLET = ITEMS.register("wallet",
             () -> new WalletItem(new Item.Properties()));
 
+    // Journal Item
+    // todo: make a 3d item model for this (utube tutorials)
     public static final RegistryObject<Item> JOURNAL = ITEMS.register("journal",
             () -> new WritableBookItem(new Item.Properties()));
     /**

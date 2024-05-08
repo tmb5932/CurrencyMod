@@ -99,8 +99,6 @@ public class CurrencyMod {
             MenuScreens.register(ModMenuTypes.INK_JUICER_MENU.get(), InkJuicerScreen::new);
             MenuScreens.register(ModMenuTypes.STAMPER_MENU.get(), StamperScreen::new);
             MenuScreens.register(ModMenuTypes.WALLET_MENU.get(), WalletScreen::new);
-            MenuScreens.register(ModMenuTypes.STAMPER_MENU.get(), StamperScreen::new);
-            MenuScreens.register(ModMenuTypes.WALLET_MENU.get(), WalletScreen::new);
             MenuScreens.register(ModMenuTypes.ENHANCEMENT_STATION_MENU.get(), EnhancementStationScreen::new);
 
             // Sets render of object to translucent so opaque things will be seen through

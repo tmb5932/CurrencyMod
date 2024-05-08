@@ -33,6 +33,7 @@ public class StamperBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final VoxelShape SHAPE = Block.box(0.5, 0, 0.5, 15.5, 17.25, 15.5);
 
+    // TODO: Maybe add ability to copy a enchantment book, that uses special ink? EXP ink?
     public StamperBlock(Properties pProperties) {
         super(pProperties);
     }
