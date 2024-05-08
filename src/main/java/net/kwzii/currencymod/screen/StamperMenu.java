@@ -1,7 +1,7 @@
 package net.kwzii.currencymod.screen;
 
 import net.kwzii.currencymod.block.ModBlocks;
-import net.kwzii.currencymod.block.entity.BasicMoneyPrinterBlockEntity;
+import net.kwzii.currencymod.block.entity.StamperBlockEntity;
 import net.kwzii.currencymod.util.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,34 +15,33 @@ import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Basic Money Printer Menu Class
- * @author Travis Brown
+ * The Stamper Menu class
  */
-public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
-    public final BasicMoneyPrinterBlockEntity blockEntity;
+public class StamperMenu extends AbstractContainerMenu {
+    public final StamperBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
     /**
-     * Constructor for the Basic Money Printer Menu
+     * Constructor for the Stamper Menu
      * Calls to other constructor
      */
-    public BasicMoneyPrinterMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public StamperMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     /**
-     * Constructor for Basic Money Printer Menu
+     * Constructor for Stamper Menu
      * Creates menu, calls methods to add the player inv and hotbar, and registers item slots in the menu
      * @param pContainerId the Container ID
      * @param inv the player inventory
      * @param entity the block entity
      * @param data the container data
      */
-    public BasicMoneyPrinterMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 3);
-        blockEntity = ((BasicMoneyPrinterBlockEntity) entity);
+    public StamperMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.STAMPER_MENU.get(), pContainerId);
+        checkContainerSize(inv, 4);
+        blockEntity = ((StamperBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
 
@@ -50,19 +49,25 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11) {
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 49, 44) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
                     return stack.is(ModTags.Items.PRINTING_PARCHMENT);
                 }
             });
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 59) {
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 109, 44) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
                     return false;
                 }
             });
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 40, 35) {
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 62, 16) {
+                @Override
+                public boolean mayPlace(@NotNull ItemStack stack) {
+                    return stack.is(ModTags.Items.STAMPS);
+                }
+            });
+            this.addSlot(new SlotItemHandler(iItemHandler, 3, 96, 16) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
                     return stack.is(ModTags.Items.JARS);
@@ -74,9 +79,9 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     }
 
     /**
-     * Method to check if the printer is progressing
+     * Method to check if the stamper is progressing
      * Used to see if progress bar needs to be rendered
-     * @return true if progress is greater than 0
+     * @return true if block entity progress is greater than 0
      */
     public boolean isCrafting() {
         return data.get(0) > 0;
@@ -111,7 +116,7 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
@@ -153,11 +158,11 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.BASIC_MONEY_PRINTER.get());
+                pPlayer, ModBlocks.STAMPER.get());
     }
 
     /**
-     * Method to add the players inventory to the Printer menu
+     * Method to add the players inventory to the Stamper menu
      * @param playerInventory the players inventory to be added
      */
     private void addPlayerInventory(Inventory playerInventory) {
@@ -169,7 +174,7 @@ public class BasicMoneyPrinterMenu extends AbstractContainerMenu {
     }
 
     /**
-     * Method to add the players inventory to the Printer menu
+     * Method to add the players inventory to the Stamper menu
      * @param playerInventory the players inventory to be added
      */
     private void addPlayerHotbar(Inventory playerInventory) {

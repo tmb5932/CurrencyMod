@@ -47,7 +47,19 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         );
 
         this.tag(ModTags.Items.BILLS).add(
-                ModItems.DOLLAR_BILL.get());
+                ModItems.ONE_DOLLAR_BILL.get(),
+                ModItems.TEN_DOLLAR_BILL.get(),
+                ModItems.TWENTY_DOLLAR_BILL.get(),
+                ModItems.FIFTY_DOLLAR_BILL.get(),
+                ModItems.HUNDRED_DOLLAR_BILL.get(),
+                ModItems.BLACK_FAKE_MONEY.get(),
+                ModItems.WHITE_FAKE_MONEY.get(),
+                ModItems.RED_FAKE_MONEY.get(),
+                ModItems.BLUE_FAKE_MONEY.get(),
+                ModItems.GREEN_FAKE_MONEY.get(),
+                ModItems.PINK_FAKE_MONEY.get(),
+                ModItems.DARK_RED_FAKE_MONEY.get()
+        );
 
         this.tag(ModTags.Items.PRINTING_PARCHMENT).add(
                 Items.PAPER,
@@ -57,6 +69,11 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 ModItems.GREEN_PAPER.get(),
                 ModItems.PINK_PAPER.get(),
                 ModItems.DARK_RED_PAPER.get()
+        );
+
+        this.tag(ModTags.Items.STAMPS).add(
+                ModItems.MONEY_STAMP.get(),
+                ModItems.RECIPE_STAMP.get()
         );
 
         this.tag(ModTags.Items.INK_CREATING_ITEMS).add(

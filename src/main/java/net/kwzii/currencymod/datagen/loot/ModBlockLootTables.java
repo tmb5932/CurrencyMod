@@ -35,6 +35,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.BASIC_MONEY_PRINTER.get());
         this.dropSelf(ModBlocks.INK_JUICER.get());
         this.dropSelf(ModBlocks.ENHANCEMENT_STATION.get());
+        this.dropSelf(ModBlocks.STAMPER.get());
 
         this.add(ModBlocks.SAPPHIRE_ORE.get(),
                 block -> createCopperLikeOreDrops(ModBlocks.SAPPHIRE_ORE.get(), ModItems.RAW_SAPPHIRE.get()));

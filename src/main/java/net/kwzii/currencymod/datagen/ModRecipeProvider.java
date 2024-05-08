@@ -95,6 +95,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('W', ItemTags.PLANKS)
                 .unlockedBy(getHasName(Items.GLASS), has(Items.GLASS))
                 .save(consumer);
+        // STAMPER RECIPE
+        // todo MAKE STAMPER RECIPE
     }
 
     /**

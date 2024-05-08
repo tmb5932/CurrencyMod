@@ -29,6 +29,8 @@ public class ModItemModelProvider extends ItemModelProvider {
      */
     @Override
     protected void registerModels() {
+        simpleItem(ModItems.MAXWELL);
+
         simpleItem(ModItems.DICE);
         simpleItem(ModItems.DOUBLE_DICE);
 
@@ -48,18 +50,35 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PINK_PAPER);
         simpleItem(ModItems.DARK_RED_PAPER);
 
-        simpleItem(ModItems.MAXWELL);
+        simpleItem(ModItems.MONEY_STAMP);
+        simpleItem(ModItems.RECIPE_STAMP);
 
         simpleItem(ModItems.RAW_SAPPHIRE);
         simpleItem(ModItems.SAPPHIRE);
 
         simpleItem(ModItems.METAL_DETECTOR);
 
-        simpleItem(ModItems.DOLLAR_BILL);
+        simpleItem(ModItems.ONE_DOLLAR_BILL);
+        simpleItem(ModItems.TEN_DOLLAR_BILL);
+        simpleItem(ModItems.TWENTY_DOLLAR_BILL);
+        simpleItem(ModItems.FIFTY_DOLLAR_BILL);
+        simpleItem(ModItems.HUNDRED_DOLLAR_BILL);
 
+        simpleItem(ModItems.BLACK_FAKE_MONEY);
+        simpleItem(ModItems.WHITE_FAKE_MONEY);
+        simpleItem(ModItems.RED_FAKE_MONEY);
+        simpleItem(ModItems.BLUE_FAKE_MONEY);
+        simpleItem(ModItems.GREEN_FAKE_MONEY);
+        simpleItem(ModItems.PINK_FAKE_MONEY);
+        simpleItem(ModItems.DARK_RED_FAKE_MONEY);
+
+        simpleItem(ModItems.WHITE_RECIPE_PAPER);
+
+        simpleItem(ModItems.WALLET);
         // Creates Item models for blocks that have a non data gen block state and model
         withExistingParent("basic_money_printer", modLoc("block/basic_money_printer"));
         withExistingParent("ink_juicer", modLoc("block/ink_juicers/ink_juicer0"));
+        withExistingParent("stamper", modLoc("block/stamper"));
         withExistingParent("enhancement_station", modLoc("block/enhancement_station"));
     }
 

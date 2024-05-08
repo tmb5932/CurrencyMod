@@ -209,7 +209,7 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
      */
     @Override
     protected void saveAdditional(CompoundTag pTag) {
-        pTag.put("inventory", itemHandler.serializeNBT());
+        pTag.put("ink_juicer.inventory", itemHandler.serializeNBT());
         pTag.putInt("ink_juicer.input_progress", inputProgress);
         pTag.putInt("ink_juicer.output_progress", outputProgress);
         pTag.putInt("ink_juicer.amt_liquid_stored", amtLiquidStored);
@@ -225,7 +225,7 @@ public class InkJuicerBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        itemHandler.deserializeNBT(pTag.getCompound("inventory"));
+        itemHandler.deserializeNBT(pTag.getCompound("ink_juicer.inventory"));
         inputProgress = pTag.getInt("ink_juicer.input_progress");
         outputProgress = pTag.getInt("ink_juicer.output_progress");
         amtLiquidStored = pTag.getInt("ink_juicer.amt_liquid_stored");

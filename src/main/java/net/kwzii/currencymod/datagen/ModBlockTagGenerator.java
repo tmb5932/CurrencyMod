@@ -44,7 +44,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 ModBlocks.BASIC_MONEY_PRINTER.get(),
-                ModBlocks.INK_JUICER.get()
+                ModBlocks.INK_JUICER.get(),
+                ModBlocks.STAMPER.get()
         );
 
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
@@ -64,7 +65,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 ModBlocks.SAPPHIRE_BLOCK.get(),
                 ModBlocks.SAPPHIRE_ORE.get(),
                 ModBlocks.BASIC_MONEY_PRINTER.get(),
-                ModBlocks.INK_JUICER.get()
+                ModBlocks.INK_JUICER.get(),
+                ModBlocks.STAMPER.get()
         );
 
 //        this.tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.);
