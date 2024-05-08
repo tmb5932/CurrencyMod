@@ -46,7 +46,7 @@ public class EnhancementStationMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 18));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 105, 18));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 104, 18));
             this.addSlot(new SlotItemHandler(iItemHandler, 2, 26, 42));
             this.addSlot(new SlotItemHandler(iItemHandler, 3, 134, 42));
             this.addSlot(new SlotItemHandler(iItemHandler, 4, 80, 56) {

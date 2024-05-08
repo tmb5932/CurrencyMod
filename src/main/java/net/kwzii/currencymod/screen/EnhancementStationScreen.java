@@ -38,8 +38,6 @@ public class EnhancementStationScreen extends AbstractContainerScreen<Enhancemen
     @Override
     protected void init() {
         super.init();
-//        this.inventoryLabelY = 5;
-        this.titleLabelX += 5;
     }
 
     /**
