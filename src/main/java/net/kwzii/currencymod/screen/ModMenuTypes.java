@@ -27,11 +27,11 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<StamperMenu>> STAMPER_MENU =
             registerMenuType("stamper_menu", StamperMenu::new);
 
-    public static final RegistryObject<MenuType<RecipePaperMenu>> RECIPE_PAPER_MENU =
-            registerMenuType("recipe_paper_menu", RecipePaperMenu::new);
-
     public static final RegistryObject<MenuType<WalletMenu>> WALLET_MENU =
             registerMenuType("wallet_menu", WalletMenu::new);
+
+    public static final RegistryObject<MenuType<EnhancementStationMenu>> ENHANCEMENT_STATION_MENU =
+            registerMenuType("enhancement_station_menu", EnhancementStationMenu::new);
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

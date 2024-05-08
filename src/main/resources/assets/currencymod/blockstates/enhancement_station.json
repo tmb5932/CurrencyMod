@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "currencymod:block/enhancement_station" },
+    "facing=east": { "model": "currencymod:block/enhancement_station", "y": 90 },
+    "facing=south": { "model": "currencymod:block/enhancement_station", "y": 180 },
+    "facing=west": { "model": "currencymod:block/enhancement_station", "y": 270 }
+  }
+}

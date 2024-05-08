@@ -2,6 +2,7 @@ package net.kwzii.currencymod.block;
 
 import net.kwzii.currencymod.CurrencyMod;
 import net.kwzii.currencymod.block.custom.BasicMoneyPrinterBlock;
+import net.kwzii.currencymod.block.custom.EnhancementStationBlock;
 import net.kwzii.currencymod.block.custom.InkJuicerBlock;
 import net.kwzii.currencymod.block.custom.StamperBlock;
 import net.kwzii.currencymod.item.ModItems;
@@ -45,6 +46,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> STAMPER = registerBlock("stamper",
             () -> new StamperBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK))); // todo make model and gui
+
+    public static final RegistryObject<Block> ENHANCEMENT_STATION = registerBlock("enhancement_station",
+            () -> new EnhancementStationBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

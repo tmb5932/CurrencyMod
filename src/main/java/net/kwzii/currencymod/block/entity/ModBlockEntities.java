@@ -28,6 +28,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("stamper_be", () ->
                     BlockEntityType.Builder.of(StamperBlockEntity::new, ModBlocks.STAMPER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<EnhancementStationBlockEntity>> ENHANCEMENT_STATION_BE =
+            BLOCK_ENTITIES.register("enhancement_station_be", () ->
+                    BlockEntityType.Builder.of(EnhancementStationBlockEntity::new, ModBlocks.ENHANCEMENT_STATION.get()).build(null));
+
     /**
      * Method to register an IEventBus with the block entities
      * @param eventBus IEventBus to be registered with the block entity deferred register

@@ -72,8 +72,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PINK_FAKE_MONEY);
         simpleItem(ModItems.DARK_RED_FAKE_MONEY);
 
-        simpleItem(ModItems.WHITE_RECIPE_PAPER);
-
         simpleItem(ModItems.WALLET);
         simpleItem(ModItems.JOURNAL);
 
@@ -81,6 +79,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent("basic_money_printer", modLoc("block/basic_money_printer"));
         withExistingParent("ink_juicer", modLoc("block/ink_juicers/ink_juicer0"));
         withExistingParent("stamper", modLoc("block/stamper"));
+        withExistingParent("enhancement_station", modLoc("block/enhancement_station"));
     }
 
     /**

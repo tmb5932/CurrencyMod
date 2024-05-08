@@ -42,11 +42,8 @@
   "item.currencymod.money_stamp": "Money Stamp",
   "item.currencymod.recipe_stamp": "Recipe Paper Stamp",
 
-  "item.currencymod.white_recipe_paper": "Recipe Paper",
   "item.currencymod.wallet": "Wallet",
   "item.currencymod.journal": "Journal",
-
-  "item.currencymod.recipe_paper_gui": "Recipe Paper",
 
   "tooltip.currencymod.metal_detector.tooltip": "Finds valuables underground!",
 
