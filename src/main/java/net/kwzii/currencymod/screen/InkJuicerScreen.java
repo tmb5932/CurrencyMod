@@ -34,8 +34,6 @@ public class InkJuicerScreen extends AbstractContainerScreen<InkJuicerMenu> {
     @Override
     protected void init() {
         super.init();
-        this.inventoryLabelY = 10000;
-        this.titleLabelY = 10000;
     }
 
     /**
