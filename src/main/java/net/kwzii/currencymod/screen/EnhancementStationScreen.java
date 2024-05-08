@@ -38,71 +38,8 @@ public class EnhancementStationScreen extends AbstractContainerScreen<Enhancemen
     @Override
     protected void init() {
         super.init();
-        this.inventoryLabelY = 10000;
-        this.titleLabelY = 10000;
-        System.out.println("ON INIT: HEAT = " + menu.getHeatValue() + "\n AERATE = " + menu.getAeratValue() + "\n PURIF = " + menu.getPurifValue());
-        this.heatSlider = new AbstractSliderButton(sliderX, 15, sliderWidth, sliderHeight, Component.literal("Heat"), ((double) menu.getHeatValue()) / 100) {
-            @Override
-            protected void updateMessage() {
-                System.out.println("Heat Changed");
-            }
-
-            @Override
-            protected void applyValue() {
-
-            }
-
-            @Override
-            public void onRelease(double pMouseX, double pMouseY) {
-                super.onRelease(pMouseX, pMouseY);
-                double newVal = (pMouseX-sliderX)/sliderWidth;
-                menu.setData(2, (int) (newVal*100));
-                System.out.println("HEAT: " + menu.getHeatValue());
-            }
-        };
-        this.aeratSlider = new AbstractSliderButton(sliderX, sliderY - 21, sliderWidth, sliderHeight, Component.literal("Aeration"), .5) {
-
-            @Override
-            protected void updateMessage() {
-                System.out.println("Aeration Changed");
-            }
-
-            @Override
-            protected void applyValue() {
-
-            }
-
-            @Override
-            public void onRelease(double pMouseX, double pMouseY) {
-                super.onRelease(pMouseX, pMouseY);
-                double newVal = (pMouseX-sliderX)/sliderWidth;
-                menu.setData(3, (int) (newVal*100));
-                System.out.println("AERAT: " + menu.getAeratValue());
-            }
-        };
-        this.purifSlider = new AbstractSliderButton(sliderX, sliderY - 37, sliderWidth, sliderHeight, Component.literal("Purification"), (double) menu.getPurifValue() / 100) {
-            @Override
-            protected void updateMessage() {
-                System.out.println("Purification Changed");
-            }
-
-            @Override
-            protected void applyValue() {
-
-            }
-
-            @Override
-            public void onRelease(double pMouseX, double pMouseY) {
-                super.onRelease(pMouseX, pMouseY);
-                double newVal = (pMouseX-sliderX)/sliderWidth;
-                menu.setData(4, (int) (newVal*100));
-                System.out.println("PURIF: " + menu.getPurifValue());
-            }
-        };
-        this.addRenderableWidget(heatSlider);
-        this.addRenderableWidget(aeratSlider);
-        this.addRenderableWidget(purifSlider);
-
+//        this.inventoryLabelY = 5;
+        this.titleLabelX += 5;
     }
 
     /**
@@ -133,7 +70,14 @@ public class EnhancementStationScreen extends AbstractContainerScreen<Enhancemen
      */
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if(menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 66, y + 26, 176, 0, 80, menu.getScaledProgress());
+            if (menu.topLeftFilled())
+                guiGraphics.blit(TEXTURE, x + 63, y + 34, 176, 0, 28, menu.getScaledVertProgress());
+            if (menu.topRightFilled())
+                guiGraphics.blit(TEXTURE, x + 86, y + 34, 204, 0, 28, menu.getScaledVertProgress());
+            if (menu.bottomLeftFilled())
+                guiGraphics.blit(TEXTURE, x + 42, y + 47, 176, 23, menu.getScaledHorzProgress(), 4);
+            if (menu.bottomRightFilled())
+                guiGraphics.blit(TEXTURE, x + 88 + (46 - menu.getScaledHorzProgress()), y + 47, 176 + (46 - menu.getScaledHorzProgress()), 23, menu.getScaledHorzProgress(), 4);
         }
     }
 

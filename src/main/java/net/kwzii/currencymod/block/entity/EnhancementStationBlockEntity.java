@@ -280,7 +280,7 @@ public class EnhancementStationBlockEntity extends BlockEntity implements MenuPr
             return true;
         } else
             // Cold Blooded Enhancement
-        if (inputHas(Items.PHANTOM_MEMBRANE) && inputHas(Items.NETHER_WART) && inputHas(Items.FERMENTED_SPIDER_EYE)) {
+        if (inputHas(Items.PHANTOM_MEMBRANE) && inputHas(Items.NETHER_WART) && inputHas(Items.FERMENTED_SPIDER_EYE) && inputHas(Items.ICE)) {
             currentRecipe = RecipeType.COLD_BLOODED;
             return true;
         }

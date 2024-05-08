@@ -45,11 +45,11 @@ public class EnhancementStationMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 60, 8));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 84, 8));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 108, 8));
-            this.addSlot(new SlotItemHandler(iItemHandler, 3, 132, 8));
-            this.addSlot(new SlotItemHandler(iItemHandler, 4, 134, 60) {
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 18));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 105, 18));
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 26, 42));
+            this.addSlot(new SlotItemHandler(iItemHandler, 3, 134, 42));
+            this.addSlot(new SlotItemHandler(iItemHandler, 4, 80, 56) {
                 @Override
                 public boolean mayPlace(@NotNull ItemStack stack) {
                     return false;
@@ -94,13 +94,25 @@ public class EnhancementStationMenu extends AbstractContainerMenu {
     }
 
     /**
-     * Method to get the current progress in % so the rendered progress arrow is accurate
+     * Method to get the current progress in % so the rendered progress arrow is accurate for top slots
      * @return % progress completed
      */
-    public int getScaledProgress() {
+    public int getScaledVertProgress() {
         int progress = this.data.get(0);        // Progress
         int maxProgress = this.data.get(1);     // Max Progress
-        int progressArrowSize = 29;     // This is the height in pixels of your arrow
+        int progressArrowSize = 22;     // This is the height in pixels of your arrow
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    /**
+     * Method to get the current progress in % so the rendered progress arrow is accurate for side slots
+     * @return % progress completed
+     */
+    public int getScaledHorzProgress() {
+        int progress = this.data.get(0);        // Progress
+        int maxProgress = this.data.get(1);     // Max Progress
+        int progressArrowSize = 46;     // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -188,5 +200,21 @@ public class EnhancementStationMenu extends AbstractContainerMenu {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
+    }
+
+    public boolean topLeftFilled() {
+        return (getSlot(TE_INVENTORY_FIRST_SLOT_INDEX).hasItem());
+    }
+
+    public boolean topRightFilled() {
+        return (getSlot(TE_INVENTORY_FIRST_SLOT_INDEX + 1).hasItem());
+    }
+
+    public boolean bottomLeftFilled() {
+        return (getSlot(TE_INVENTORY_FIRST_SLOT_INDEX + 2).hasItem());
+    }
+
+    public boolean bottomRightFilled() {
+        return (getSlot(TE_INVENTORY_FIRST_SLOT_INDEX + 3).hasItem());
     }
 }
