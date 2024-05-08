@@ -3,6 +3,7 @@ package net.kwzii.currencymod.item;
 import net.kwzii.currencymod.CurrencyMod;
 import net.kwzii.currencymod.item.custom.*;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.WritableBookItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -134,8 +135,12 @@ public class ModItems {
     public static final RegistryObject<Item> WHITE_RECIPE_PAPER = ITEMS.register("white_recipe_paper",
             () -> new RecipePaperItem(new Item.Properties()));
 
+    // Wallet Item
     public static final RegistryObject<Item> WALLET = ITEMS.register("wallet",
             () -> new WalletItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> JOURNAL = ITEMS.register("journal",
+            () -> new WritableBookItem(new Item.Properties()));
     /**
      * Registers an IEventBus with the mod items
      * @param eventBus the IEventBus to be registered
