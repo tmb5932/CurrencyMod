@@ -27,9 +27,6 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<StamperMenu>> STAMPER_MENU =
             registerMenuType("stamper_menu", StamperMenu::new);
 
-    public static final RegistryObject<MenuType<RecipePaperMenu>> RECIPE_PAPER_MENU =
-            registerMenuType("recipe_paper_menu", RecipePaperMenu::new);
-
     public static final RegistryObject<MenuType<WalletMenu>> WALLET_MENU =
             registerMenuType("wallet_menu", WalletMenu::new);
 

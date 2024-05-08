@@ -129,11 +129,7 @@ public class ModItems {
     public static final RegistryObject<Item> MONEY_STAMP = ITEMS.register("money_stamp",
             () -> new Item(new Item.Properties().stacksTo(1)));
 
-    // Recipe Paper Item
-    // todo make proper model for this V
-    public static final RegistryObject<Item> WHITE_RECIPE_PAPER = ITEMS.register("white_recipe_paper",
-            () -> new RecipePaperItem(new Item.Properties()));
-
+    // Wallet Item
     public static final RegistryObject<Item> WALLET = ITEMS.register("wallet",
             () -> new WalletItem(new Item.Properties()));
     /**

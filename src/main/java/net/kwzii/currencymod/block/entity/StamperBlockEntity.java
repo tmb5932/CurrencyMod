@@ -267,8 +267,6 @@ public class StamperBlockEntity extends BlockEntity implements MenuProvider {
                         + ", input:" + itemHandler.getStackInSlot(INPUT_SLOT));
                 return new ItemStack(Items.PAPER, Items.PAPER.getMaxStackSize() + 1);
             }
-        } else if (stamp == ModItems.RECIPE_STAMP.get()) {
-            result = ModItems.WHITE_RECIPE_PAPER.get();
         } else {
             System.out.println("!!! CurrencyMod: Cannot find output item for ink:"
                     + itemHandler.getStackInSlot(INK_SLOT) + ", stamp:" + itemHandler.getStackInSlot(STAMP_SLOT)

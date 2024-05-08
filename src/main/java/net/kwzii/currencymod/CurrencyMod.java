@@ -98,10 +98,8 @@ public class CurrencyMod {
             MenuScreens.register(ModMenuTypes.BASIC_MONEY_PRINTER_MENU.get(), BasicMoneyPrinterScreen::new);
             MenuScreens.register(ModMenuTypes.INK_JUICER_MENU.get(), InkJuicerScreen::new);
             MenuScreens.register(ModMenuTypes.STAMPER_MENU.get(), StamperScreen::new);
-            MenuScreens.register(ModMenuTypes.RECIPE_PAPER_MENU.get(), RecipePaperScreen::new);
             MenuScreens.register(ModMenuTypes.WALLET_MENU.get(), WalletScreen::new);
             MenuScreens.register(ModMenuTypes.STAMPER_MENU.get(), StamperScreen::new);
-            MenuScreens.register(ModMenuTypes.RECIPE_PAPER_MENU.get(), RecipePaperScreen::new);
             MenuScreens.register(ModMenuTypes.WALLET_MENU.get(), WalletScreen::new);
             MenuScreens.register(ModMenuTypes.ENHANCEMENT_STATION_MENU.get(), EnhancementStationScreen::new);
 
