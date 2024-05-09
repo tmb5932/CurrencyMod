@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class EnhancementStationBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
+    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
 
     /**
      * Constructor for the enhancement station

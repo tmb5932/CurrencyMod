@@ -92,10 +92,4 @@ public class EnhancementStationScreen extends AbstractContainerScreen<Enhancemen
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
-
-    @Override
-    public void onClose() {
-        System.out.println("ON CLOSE: HEAT = " + menu.getHeatValue() + "\nAERATE = " + menu.getAeratValue() + "\nPURIF = " + menu.getPurifValue());
-        super.onClose();
-    }
 }

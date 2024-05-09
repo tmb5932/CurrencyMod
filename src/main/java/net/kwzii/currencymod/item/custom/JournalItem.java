@@ -16,7 +16,6 @@ public class JournalItem extends WritableBookItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
-        System.out.println("USED");
         return super.use(pLevel, pPlayer, pHand);
     }
 

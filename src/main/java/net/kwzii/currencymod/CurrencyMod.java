@@ -103,6 +103,7 @@ public class CurrencyMod {
 
             // Sets render of object to translucent so opaque things will be seen through
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.INK_JUICER.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.ENHANCEMENT_STATION.get(), RenderType.translucent());
         }
     }
 }
