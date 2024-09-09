@@ -19,6 +19,7 @@ Currency Mod is a Minecraft Mod for version 1.20.1, that was originally planned 
 - **Custom Block Textures**
 - **Custom Crafting Recipes**
 - **Custom Ores**
+- More trades, items, and blocks in the works!
 
 ### Authors Note
 This is a minecraft mod about me messing around with all the things I can do in minecraft modding.
